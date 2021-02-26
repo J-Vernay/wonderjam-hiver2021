@@ -65,7 +65,13 @@ func slash(direction):
 	disableImpulse = true
 	slashDirection = direction
 	$ImpulseZone/CollisionShape2D.disabled = false
-	#Faut placer la position de la zone maintenant
+	var newPositionVector = getVectorFromDirection(slashDirection)
+	if(newPositionVector.x != 0):
+		if(newPositionVector.x > 0):
+			$ImpulseZone.position.x = abs($ImpulseZone.position.x)
+		else:
+			$ImpulseZone.position.x = -abs($ImpulseZone.position.x)
+	
 
 func getMyInput(name : String):
 	return name + str(controlMode)
@@ -74,7 +80,13 @@ func getMyInput(name : String):
 func _on_ImpulseZone_body_entered(body):
 	var impulse = Vector2()
 	var FORCE = 500
-	match(slashDirection):
+	impulse = getVectorFromDirection(slashDirection)
+	body.apply_central_impulse(impulse * FORCE)
+
+
+func getVectorFromDirection(direction):
+	var impulse = Vector2()
+	match(direction):
 		1:
 			impulse = Vector2.RIGHT
 		2:
@@ -91,5 +103,4 @@ func _on_ImpulseZone_body_entered(body):
 			impulse = Vector2.DOWN
 		-4:
 			impulse = Vector2(-1, 1)
-	
-	body.apply_central_impulse(impulse * FORCE)
+	return impulse
