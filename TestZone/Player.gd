@@ -53,10 +53,13 @@ func IdleProcess(delta):
 		else:
 			velocity.x = clamp(velocity.x - ACCELERATION, -MAXSPEED, MAXSPEED)
 			$AnimatedSprite.flip_h = true
+	else:
+		velocity.x = lerp(velocity.x, 0, FRICTION)
 	if(jump):
 		velocity.y = -JUMPFORCE
 		setState(States.Jump)
 	
+	velocity.y += GRAVITY * delta
 	velocity = move_and_slide(velocity, VECTOR_UP)
 	
 	if(disableImpulse):
@@ -82,11 +85,12 @@ func WalkProcess(delta):
 			$AnimatedSprite.flip_h = true
 	else:
 		velocity.x = lerp(velocity.x, 0, FRICTION)
-		if(abs(velocity.x) <= 1):
+		if(abs(velocity.x) <= 20):
 			setState(States.Idle)
 	if(jump && is_on_floor()):
 		velocity.y = -JUMPFORCE
 		setState(States.Jump)
+	velocity.y += GRAVITY * delta
 	velocity = move_and_slide(velocity, VECTOR_UP)
 	
 	if(!is_on_floor()):
