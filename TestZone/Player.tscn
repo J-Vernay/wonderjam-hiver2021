@@ -30,6 +30,7 @@ frames = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 0, -100 )
 current = true
 smoothing_enabled = true
 drag_margin_left = 0.4

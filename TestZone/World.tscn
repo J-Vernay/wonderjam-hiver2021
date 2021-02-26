@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://TestZone/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://TestZone/World.gd" type="Script" id=3]
 [ext_resource path="res://TestZone/Debris.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Graphics/cyberpunk-street.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 512, 10 )
@@ -11,9 +12,16 @@ extents = Vector2( 512, 10 )
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="cyberpunk-street" type="Sprite" parent="."]
+position = Vector2( -0.826721, 2.51433 )
+scale = Vector2( 1.96966, 2.95978 )
+texture = ExtResource( 5 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 172.834 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( -5.34534, 169.271 )
 __meta__ = {
 "_edit_group_": true
 }
