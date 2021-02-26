@@ -18,6 +18,13 @@ _global_script_class_icons={
 config/name="Wonder Jam Hiver 2021"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1200
+window/size/height=900
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
 [input]
 
 Right1={
