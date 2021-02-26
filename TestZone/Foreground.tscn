@@ -1,12 +1,6 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://TestZone/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Graphics/fg-tileset.png" type="Texture" id=2]
-[ext_resource path="res://TestZone/World.gd" type="Script" id=3]
-[ext_resource path="res://TestZone/Debris.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Graphics/bg-layers/foreground.png" type="Texture" id=5]
-[ext_resource path="res://Graphics/bg-layers/far-buildings.png" type="Texture" id=6]
-[ext_resource path="res://Graphics/bg-layers/back-buildings.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/fg-tileset.png" type="Texture" id=1]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -46,7 +40,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="TileSet" id=13]
 0/name = "fg-tileset.png 0"
-0/texture = ExtResource( 2 )
+0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 254, 101 )
@@ -140,69 +134,10 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 } ]
 0/z_index = 0
 
-[node name="World" type="Node2D"]
-script = ExtResource( 3 )
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 172.834 )
-
-[node name="Debris" parent="." instance=ExtResource( 4 )]
-position = Vector2( 160, 0 )
-mass = 1.0
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_ignore_camera_zoom = true
-
-[node name="Background" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.2, 1 )
-motion_offset = Vector2( 0, -340 )
-motion_mirroring = Vector2( 870, 0 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background"]
-scale = Vector2( 4, 4 )
-texture = ExtResource( 6 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 300, 180 )
-
-[node name="Buildings" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.4, 1 )
-motion_offset = Vector2( 0, -340 )
-motion_mirroring = Vector2( 1024, 0 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Buildings"]
-scale = Vector2( 4, 4 )
-texture = ExtResource( 7 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 300, 160 )
-
-[node name="Foreground" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.6, 1 )
-motion_offset = Vector2( 0, -340 )
-motion_mirroring = Vector2( 1196.8, 0 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Foreground"]
-scale = Vector2( 3.4, 3.4 )
-texture = ExtResource( 5 )
-centered = false
-
-[node name="Foreground" type="Node2D" parent="."]
+[node name="Foreground" type="Node2D"]
 scale = Vector2( 3, 3 )
 
-[node name="TileMap" type="TileMap" parent="Foreground"]
+[node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 13 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
