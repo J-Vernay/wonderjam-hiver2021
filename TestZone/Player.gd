@@ -8,7 +8,7 @@ const FRICTION = 0.2
 const ACCELERATION = 40
 const AIRCONTROLRATIO = 0.1
 const GRAVITY = 600
-const JUMPFORCE = 300
+const JUMPFORCE = 400
 
 var velocity : Vector2
 var disableImpulse = false
