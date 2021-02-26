@@ -13,15 +13,148 @@ const JUMPFORCE = 300
 var velocity : Vector2
 var disableImpulse = false
 
-enum direction{
-	leftUp = 0, up = 1, upRight = 2, right = 3, downLeft = 4, down = 5, downRight = 6, left = 7, none = 8
+enum States{
+	Idle, Walk, Jump, Fall, Cast
 }
+
 
 func _ready():
 	velocity = Vector2(0, 0)
 
 
+var state = States.Idle
 func _physics_process(delta):
+	if(!Engine.editor_hint):
+		match(state):
+			States.Idle:
+				IdleProcess(delta)
+			States.Walk:
+				WalkProcess(delta)
+			States.Jump:
+				JumpProcess(delta)
+			States.Fall:
+				FallProcess(delta)
+			States.Cast:
+				CastProcess(delta)
+
+
+func IdleProcess(delta):
+	var right = Input.is_action_pressed(getMyInput("Right"))
+	var left = Input.is_action_pressed(getMyInput("Left"))
+	var up = Input.is_action_pressed(getMyInput("Up"))
+	var jump = Input.is_action_pressed(getMyInput("Jump"))
+	var down = Input.is_action_pressed(getMyInput("Down"))
+	var attack = Input.is_action_just_pressed(getMyInput("Attack"))
+	if(right != left):
+		setState(States.Walk)
+		if(right):
+			velocity.x = clamp(velocity.x + ACCELERATION, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = false
+		else:
+			velocity.x = clamp(velocity.x - ACCELERATION, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = true
+	if(jump):
+		velocity.y = -JUMPFORCE
+		setState(States.Jump)
+	
+	velocity = move_and_slide(velocity, VECTOR_UP)
+	
+	if(disableImpulse):
+		$ImpulseZone/CollisionShape2D.disabled = true
+		
+	if(attack):
+		slash(getDirection(up, right, down, left))
+
+
+func WalkProcess(delta):
+	var right = Input.is_action_pressed(getMyInput("Right"))
+	var left = Input.is_action_pressed(getMyInput("Left"))
+	var up = Input.is_action_pressed(getMyInput("Up"))
+	var jump = Input.is_action_pressed(getMyInput("Jump"))
+	var down = Input.is_action_pressed(getMyInput("Down"))
+	var attack = Input.is_action_just_pressed(getMyInput("Attack"))
+	if(right != left):
+		if(right):
+			velocity.x = clamp(velocity.x + ACCELERATION, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = false
+		else:
+			velocity.x = clamp(velocity.x - ACCELERATION, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = true
+	else:
+		velocity.x = lerp(velocity.x, 0, FRICTION)
+		if(abs(velocity.x) <= 1):
+			setState(States.Idle)
+	if(jump && is_on_floor()):
+		velocity.y = -JUMPFORCE
+		setState(States.Jump)
+	velocity = move_and_slide(velocity, VECTOR_UP)
+	
+	if(!is_on_floor()):
+		setState(States.Fall)
+	
+	if(disableImpulse):
+		$ImpulseZone/CollisionShape2D.disabled = true
+		
+	if(attack):
+		slash(getDirection(up, right, down, left))
+
+
+func JumpProcess(delta):
+	var right = Input.is_action_pressed(getMyInput("Right"))
+	var left = Input.is_action_pressed(getMyInput("Left"))
+	var up = Input.is_action_pressed(getMyInput("Up"))
+	var down = Input.is_action_pressed(getMyInput("Down"))
+	var attack = Input.is_action_just_pressed(getMyInput("Attack"))
+	if(right != left):
+		if(right):
+			velocity.x = clamp(velocity.x + ACCELERATION * AIRCONTROLRATIO, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = false
+		else:
+			velocity.x = clamp(velocity.x - ACCELERATION * AIRCONTROLRATIO, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = true
+	else:
+		velocity.x = lerp(velocity.x, 0, FRICTION * AIRCONTROLRATIO)
+	
+	velocity.y += GRAVITY * delta
+	velocity = move_and_slide(velocity, VECTOR_UP)
+	if(velocity.y >= 0):
+		setState(States.Fall)
+	
+	if(disableImpulse):
+		$ImpulseZone/CollisionShape2D.disabled = true
+		
+	if(attack):
+		slash(getDirection(up, right, down, left))
+
+
+func FallProcess(delta):
+	var right = Input.is_action_pressed(getMyInput("Right"))
+	var left = Input.is_action_pressed(getMyInput("Left"))
+	var up = Input.is_action_pressed(getMyInput("Up"))
+	var down = Input.is_action_pressed(getMyInput("Down"))
+	var attack = Input.is_action_just_pressed(getMyInput("Attack"))
+	if(right != left):
+		if(right):
+			velocity.x = clamp(velocity.x + ACCELERATION * AIRCONTROLRATIO, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = false
+		else:
+			velocity.x = clamp(velocity.x - ACCELERATION * AIRCONTROLRATIO, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = true
+	else:
+		velocity.x = lerp(velocity.x, 0, FRICTION * AIRCONTROLRATIO)
+	
+	velocity.y += GRAVITY * delta
+	velocity = move_and_slide(velocity, VECTOR_UP)
+	if(is_on_floor()):
+		setState(States.Walk)
+	if(disableImpulse):
+		$ImpulseZone/CollisionShape2D.disabled = true
+		
+	if(attack):
+		slash(getDirection(up, right, down, left))
+
+
+func CastProcess(delta):
 	var right = Input.is_action_pressed(getMyInput("Right"))
 	var left = Input.is_action_pressed(getMyInput("Left"))
 	var up = Input.is_action_pressed(getMyInput("Up"))
@@ -31,17 +164,15 @@ func _physics_process(delta):
 	if(right != left):
 		if(right):
 			velocity.x = clamp(velocity.x + ACCELERATION, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = false
 		else:
 			velocity.x = clamp(velocity.x - ACCELERATION, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = true
 	else:
 		velocity.x = lerp(velocity.x, 0, FRICTION)
 	if(jump && is_on_floor()):
 		velocity.y = -JUMPFORCE
 	velocity.y += GRAVITY * delta
-	if(velocity.x > 0):
-		$AnimatedSprite.flip_h = false
-	else:
-		$AnimatedSprite.flip_h = true
 	velocity = move_and_slide(velocity, VECTOR_UP)
 	
 	if(disableImpulse):
@@ -49,6 +180,31 @@ func _physics_process(delta):
 		
 	if(attack):
 		slash(getDirection(up, right, down, left))
+
+func setState(newState):
+	match(state):
+		States.Idle:
+			pass
+		States.Walk:
+			pass
+		States.Jump:
+			pass
+		States.Fall:
+			pass
+		States.Cast:
+			pass
+	state = newState
+	match(state):
+		States.Idle:
+			$AnimatedSprite.play("Idle")
+		States.Walk:
+			$AnimatedSprite.play("Run")
+		States.Jump:
+			$AnimatedSprite.play("Jump")
+		States.Fall:
+			$AnimatedSprite.play("Fall")
+		States.Cast:
+			$AnimatedSprite.play("Cast")
 
 
 func getDirection(up : bool, right : bool, down : bool, left : bool):
@@ -104,3 +260,7 @@ func getVectorFromDirection(direction):
 		-4:
 			impulse = Vector2(-1, 1)
 	return impulse
+
+
+func _on_AnimatedSprite_animation_finished():
+	pass # Replace with function body.
