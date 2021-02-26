@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://TestZone/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://TestZone/World.gd" type="Script" id=3]
+[ext_resource path="res://TestZone/Debris.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 512, 10 )
@@ -26,3 +27,7 @@ self_modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 0, 48 )
 scale = Vector2( 16, 0.25 )
 texture = ExtResource( 2 )
+
+[node name="Debris" parent="." instance=ExtResource( 4 )]
+position = Vector2( 160, 0 )
+mass = 1.0
