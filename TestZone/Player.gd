@@ -14,7 +14,7 @@ var velocity : Vector2
 var disableImpulse = false
 
 enum States{
-	Idle, Walk, Jump, Fall, Cast
+	Idle, Walk, Jump, Fall, Cast, Attack
 }
 
 
@@ -36,6 +36,8 @@ func _physics_process(delta):
 				FallProcess(delta)
 			States.Cast:
 				CastProcess(delta)
+			States.Attack:
+				AttackProcess(delta)
 
 
 func IdleProcess(delta):
@@ -62,9 +64,6 @@ func IdleProcess(delta):
 	velocity.y += GRAVITY * delta
 	velocity = move_and_slide(velocity, VECTOR_UP)
 	
-	if(disableImpulse):
-		$ImpulseZone/CollisionShape2D.disabled = true
-		
 	if(attack):
 		slash(getDirection(up, right, down, left))
 
@@ -96,9 +95,6 @@ func WalkProcess(delta):
 	if(!is_on_floor()):
 		setState(States.Fall)
 	
-	if(disableImpulse):
-		$ImpulseZone/CollisionShape2D.disabled = true
-		
 	if(attack):
 		slash(getDirection(up, right, down, left))
 
@@ -124,9 +120,6 @@ func JumpProcess(delta):
 	if(velocity.y >= 0):
 		setState(States.Fall)
 	
-	if(disableImpulse):
-		$ImpulseZone/CollisionShape2D.disabled = true
-		
 	if(attack):
 		slash(getDirection(up, right, down, left))
 
@@ -151,9 +144,7 @@ func FallProcess(delta):
 	velocity = move_and_slide(velocity, VECTOR_UP)
 	if(is_on_floor()):
 		setState(States.Walk)
-	if(disableImpulse):
-		$ImpulseZone/CollisionShape2D.disabled = true
-		
+	
 	if(attack):
 		slash(getDirection(up, right, down, left))
 
@@ -179,11 +170,34 @@ func CastProcess(delta):
 	velocity.y += GRAVITY * delta
 	velocity = move_and_slide(velocity, VECTOR_UP)
 	
-	if(disableImpulse):
-		$ImpulseZone/CollisionShape2D.disabled = true
-		
 	if(attack):
 		slash(getDirection(up, right, down, left))
+
+
+func AttackProcess(delta):
+	var right = Input.is_action_pressed(getMyInput("Right"))
+	var left = Input.is_action_pressed(getMyInput("Left"))
+	var up = Input.is_action_pressed(getMyInput("Up"))
+	var jump = Input.is_action_pressed(getMyInput("Jump"))
+	var down = Input.is_action_pressed(getMyInput("Down"))
+	if(right != left):
+		if(right):
+			velocity.x = clamp(velocity.x + ACCELERATION, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = false
+		else:
+			velocity.x = clamp(velocity.x - ACCELERATION, -MAXSPEED, MAXSPEED)
+			$AnimatedSprite.flip_h = true
+	else:
+		velocity.x = lerp(velocity.x, 0, FRICTION)
+	if(jump && is_on_floor()):
+		velocity.y = -JUMPFORCE
+	velocity.y += GRAVITY * delta
+	velocity = move_and_slide(velocity, VECTOR_UP)
+	
+	if(disableImpulse):
+		$ImpulseZone/CollisionShape2D.disabled = true
+	
+
 
 func setState(newState):
 	match(state):
@@ -222,8 +236,14 @@ func getDirection(up : bool, right : bool, down : bool, left : bool):
 
 var slashDirection
 func slash(direction):
+	setState(States.Attack)
 	disableImpulse = true
 	slashDirection = direction
+	if(slashDirection >= 2):
+		$AnimatedSprite.play("AttackUp")
+	else:
+		$AnimatedSprite.play("AttackFront")
+	
 	$ImpulseZone/CollisionShape2D.disabled = false
 	var newPositionVector = getVectorFromDirection(slashDirection)
 	if(newPositionVector.x != 0):
@@ -267,4 +287,5 @@ func getVectorFromDirection(direction):
 
 
 func _on_AnimatedSprite_animation_finished():
-	pass # Replace with function body.
+	if(state == States.Attack):
+		setState(States.Walk)
