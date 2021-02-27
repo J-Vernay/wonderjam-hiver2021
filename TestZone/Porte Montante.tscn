@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 40 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 
 [node name="Porte Montante" type="StaticBody2D"]
@@ -17,7 +17,7 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( -7.62939e-06, -3.8147e-06 )
 scale = Vector2( 0.25, 1.25 )
 texture = ExtResource( 1 )

@@ -1,9 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Levels/AllLevels.gd" type="Script" id=1]
 [ext_resource path="res://Graphics/Montserrat-Light.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Levels/Text.shader" type="Shader" id=3]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 30
 use_mipmaps = true
 use_filter = true
@@ -37,13 +41,14 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="CanvasLayer/ColorRect"]
+material = SubResource( 2 )
 anchor_right = 1.007
 anchor_bottom = 1.0
 margin_left = 20.2798
 margin_top = 5.59418
 margin_right = 328.28
 margin_bottom = 43.5942
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Je dois m'échapper..."
 __meta__ = {
 "_edit_use_anchors_": false
