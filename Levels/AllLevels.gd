@@ -27,6 +27,9 @@ func _ready():
 	_goto_scene(levels[curr_lvl].instance())
 	$Timer.start($Timer.wait_time / 2)
 	$CanvasLayer/Rect.scale = Vector2(SCREEN_WIDTH, SCREEN_HEIGHT)
+	label = $CanvasLayer/ColorRect/Label
+	label_base_x = label.rect_position.x
+	put_text("Je dois m'échapper...")
 
 
 var last_progress = -1
@@ -35,6 +38,7 @@ func _process(delta):
 	if Engine.editor_hint:
 		$CanvasLayer/Rect.scale = Vector2(SCREEN_WIDTH, SCREEN_HEIGHT)
 		return
+	_process_text()
 	var progress = 1 - $Timer.time_left / $Timer.wait_time
 	$CanvasLayer/Rect.position.x = lerp(-SCREEN_WIDTH, SCREEN_WIDTH, progress)
 	
@@ -46,6 +50,7 @@ func _process(delta):
 		_curr_scene_instance = _next_scene_instance
 		_curr_scene_instance.connect("reached_end", self, "_on_reached_end")
 		_curr_scene_instance.connect("reset_to_checkpoint", self, "_on_reset_to_checkpoint")
+		_curr_scene_instance.connect("put_text", self, "put_text")
 		player = _curr_scene_instance.get_node("Player")
 		player.controlMode = playerNumber
 		player.world = self
@@ -105,3 +110,34 @@ func receiveObject(object):
 			thun.setPosition(player.global_position + Vector2(0, 10))
 			_curr_scene_instance.add_child(thun)
 
+###### LOGIC FOR TEXT
+
+var label_base_x := 0
+var label = null
+
+func put_text(text):
+	label.text = text
+	$TextTimer.wait_time = text.length() / 12 + 3
+	$TextTimer.start()
+
+func _process_text():
+	# display 10 characters per second
+	label.visible_characters = 10 * ($TextTimer.wait_time - $TextTimer.time_left)
+	
+	var progress = 1 - $TextTimer.time_left / $TextTimer.wait_time
+	if progress <= 0.5:
+		# text appearing
+		progress = inverse_lerp(0, 0.5, progress)
+		label.modulate.a = progress
+		label.rect_position.x = label_base_x + 200 * (1-progress) * (1-progress)
+	elif progress <= 0.8:
+		# text staying
+		progress = inverse_lerp(0.5, 0.8, progress)
+		label.modulate.a = 1
+		label.rect_position.x = label_base_x
+	else:
+		# text disappearing
+		progress = inverse_lerp(0.8, 1, progress)
+		label.modulate.a = 1 - progress
+		label.rect_position.x = label_base_x - 100 * progress * progress
+	
