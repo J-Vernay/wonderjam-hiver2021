@@ -1,4 +1,8 @@
 extends RigidBody2D
+tool
+
+export var SCALEX := 1.0
+export var SCALEY := 1.0
 
 var stuckTimer = 0;
 var isStuck = false;
@@ -8,8 +12,18 @@ var oldAngularVelocity : float
 const STUCK_TIME = 4
 
 func _ready():
-	scale = Vector2(rand_range(0.5, 1.5), rand_range(0.5, 1.5))
+	$Sprite.scale.x = SCALEX
+	$Sprite.scale.y = SCALEY
+	$CollisionShape2D.scale.x = SCALEX * 0.92
+	$CollisionShape2D.scale.y = SCALEY * 0.92
 	add_to_group("pushables", true)
+
+func _process(delta):
+	if Engine.editor_hint:
+		$Sprite.scale.x = SCALEX
+		$Sprite.scale.y = SCALEY
+		$CollisionShape2D.scale.x = SCALEX * 0.92
+		$CollisionShape2D.scale.y = SCALEY * 0.92
 	
 func _physics_process(delta):
 	if(isStuck):
