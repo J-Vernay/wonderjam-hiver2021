@@ -1,5 +1,7 @@
 extends Node2D
 
+###### LOGIC FOR SCENE TRANSITIONS
+
 export var SCREEN_WIDTH := 1200
 export var SCREEN_HEIGHT := 900
 
@@ -55,15 +57,19 @@ func _process(delta):
 
 func _on_reached_end():
 	_curr_checkpoint_name = ""
+	curr_lvl += 1
+	_goto_scene(levels[curr_lvl].instance())
+	$Timer.start()
 
 func _on_reset_to_checkpoint(name):
-	print("hi")
-	last_progress = -1
 	_curr_checkpoint_name = name
 	_goto_scene(levels[curr_lvl].instance())
 	$Timer.start()
 	
-	
+
+
+###### LOGIC FOR MULTIPLAYER
+
 export var playerNumber = 1
 export(NodePath) var otherWorld
 var Box = preload("res://TestZone/Debris.tscn")
@@ -73,8 +79,6 @@ var player : KinematicBody2D
 enum Objects{
 	Boost, Boxes, Thunder
 }
-
-
 
 func applyObject(object):
 	match(object):

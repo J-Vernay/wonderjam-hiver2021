@@ -21,19 +21,19 @@ func _ready():
 	_player.position = _current_checkpoint.position
 	
 	
-func update_checkpoint(body, checkpoint_name):
+func update_checkpoint(__, checkpoint_name):
 	print(checkpoint_name)
 	var checkpoint = $Checkpoints.get_node(checkpoint_name)
 	if checkpoint.get_index() > _current_checkpoint.get_index():
 		print("ok")
 		_current_checkpoint = checkpoint
 
-func trigger_last_checkpoint(body):
+func trigger_last_checkpoint(__):
 	emit_signal("reset_to_checkpoint", _current_checkpoint.name)
 
 func goto_checkpoint(name):
 	update_checkpoint(null,name)
 	_player.position = _current_checkpoint.position
 
-func trigger_end():
+func trigger_end(__):
 	emit_signal("reached_end")

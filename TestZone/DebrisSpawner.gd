@@ -6,7 +6,7 @@ const GROWTHTIME = 1
 export var boxSize := Vector2(1, 1)
 
 var growth = true
-var growthTimer = 0
+var growthTimer = GROWTHTIME
 
 func _physics_process(delta):
 	if !Engine.editor_hint:
