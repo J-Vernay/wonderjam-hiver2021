@@ -4,16 +4,29 @@ export var controlMode = 1 # Can be 1 or 2 if player 1 or 2
 
 const VECTOR_UP = Vector2(0, -1)
 const SNAPVECTOR = Vector2(0, 10)
-const MAXSPEED = 300
+const MAXSPEED = 400
 const FRICTION = 0.8
-const ACCELERATION = 40
-const AIRCONTROLRATIO = 0.1
+const ACCELERATION = 70
+const AIRCONTROLRATIO = 0.2
 const GRAVITY = 600
-const JUMPFORCE = 400
+const JUMPFORCE = 300
 const PUSH = 70
+const COYOTE_TIME = 0.1
+const JUMP_TIME = 0.4
+const JUMP_HEIGHT = -150
 
 var velocity : Vector2
 var disableImpulse = false
+var time_since_last_ground = 1000
+var time_since_jump = 0
+
+
+var right = false
+var left = false
+var up = false
+var jump = false
+var down = false
+var attack = false
 
 enum States{
 	Idle, Walk, Jump, Fall, Cast, Attack
@@ -27,6 +40,18 @@ func _ready():
 var state = States.Idle
 func _physics_process(delta):
 	if(!Engine.editor_hint):
+		right = Input.is_action_pressed(getMyInput("Right"))
+		left = Input.is_action_pressed(getMyInput("Left"))
+		up = Input.is_action_pressed(getMyInput("Up"))
+		jump = Input.is_action_pressed(getMyInput("Jump"))
+		down = Input.is_action_pressed(getMyInput("Down"))
+		attack = Input.is_action_just_pressed(getMyInput("Attack"))
+		
+		time_since_last_ground += delta
+		time_since_jump += delta
+		if (state != States.Jump and jump and time_since_last_ground <= COYOTE_TIME):
+			StartJump()
+		
 		match(state):
 			States.Idle:
 				IdleProcess(delta)
@@ -47,7 +72,7 @@ func _physics_process(delta):
 				setState(States.Cast)
 
 func DoCustomMove(do_snap):
-	velocity = move_and_slide_with_snap(velocity, int(do_snap)*SNAPVECTOR, VECTOR_UP, true, 4, deg2rad(50), false)
+	velocity = move_and_slide_with_snap(velocity, int(do_snap)*SNAPVECTOR, VECTOR_UP, true, 4, deg2rad(60), false)
 	for index in get_slide_count():
 		var collision = get_slide_collision(index)
 		if (collision.collider.is_in_group("pushables")):
@@ -55,12 +80,8 @@ func DoCustomMove(do_snap):
 
 
 func IdleProcess(delta):
-	var right = Input.is_action_pressed(getMyInput("Right"))
-	var left = Input.is_action_pressed(getMyInput("Left"))
-	var up = Input.is_action_pressed(getMyInput("Up"))
-	var jump = Input.is_action_pressed(getMyInput("Jump"))
-	var down = Input.is_action_pressed(getMyInput("Down"))
-	var attack = Input.is_action_just_pressed(getMyInput("Attack"))
+	time_since_last_ground = 0
+	
 	if(right != left):
 		setState(States.Walk)
 		if(right):
@@ -81,14 +102,10 @@ func IdleProcess(delta):
 	if(attack):
 		slash(getDirection(up, right, down, left))
 
+	
 
 func WalkProcess(delta):
-	var right = Input.is_action_pressed(getMyInput("Right"))
-	var left = Input.is_action_pressed(getMyInput("Left"))
-	var up = Input.is_action_pressed(getMyInput("Up"))
-	var jump = Input.is_action_pressed(getMyInput("Jump"))
-	var down = Input.is_action_pressed(getMyInput("Down"))
-	var attack = Input.is_action_just_pressed(getMyInput("Attack"))
+	time_since_last_ground = 0
 	if(right != left):
 		if(right):
 			velocity.x = clamp(velocity.x + ACCELERATION, -MAXSPEED, MAXSPEED)
@@ -101,8 +118,7 @@ func WalkProcess(delta):
 		if(abs(velocity.x) <= 20):
 			setState(States.Idle)
 	if(jump && is_on_floor()):
-		velocity.y = -JUMPFORCE
-		setState(States.Jump)
+		StartJump()
 	velocity.y += GRAVITY * delta
 	DoCustomMove(true)
 	
@@ -112,13 +128,13 @@ func WalkProcess(delta):
 	if(attack):
 		slash(getDirection(up, right, down, left))
 
+func StartJump():
+	velocity.y = -JUMPFORCE
+	setState(States.Jump)
+	time_since_jump = 0
 
 func JumpProcess(delta):
-	var right = Input.is_action_pressed(getMyInput("Right"))
-	var left = Input.is_action_pressed(getMyInput("Left"))
-	var up = Input.is_action_pressed(getMyInput("Up"))
-	var down = Input.is_action_pressed(getMyInput("Down"))
-	var attack = Input.is_action_just_pressed(getMyInput("Attack"))
+	time_since_last_ground = 1000
 	if(right != left):
 		if(right):
 			velocity.x = clamp(velocity.x + ACCELERATION * AIRCONTROLRATIO, -MAXSPEED, MAXSPEED)
@@ -129,22 +145,22 @@ func JumpProcess(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0, FRICTION * AIRCONTROLRATIO)
 	
-	velocity.y += GRAVITY * delta
+	var progress = time_since_jump / JUMP_TIME
+	velocity.y = 2 * JUMP_HEIGHT * (1-progress) / JUMP_TIME
+	#velocity.y += GRAVITY * delta
+	#elocity.y = velocity.y / 1.0001 + 1
 	DoCustomMove(false)
 	#velocity = move_and_slide(velocity, VECTOR_UP)
-	if(velocity.y >= 0):
+	if(progress >= 1 || !jump):
+		velocity.y /= 3
 		setState(States.Fall)
 	
 	if(attack):
+		velocity.y /= 3
 		slash(getDirection(up, right, down, left))
 
 
 func FallProcess(delta):
-	var right = Input.is_action_pressed(getMyInput("Right"))
-	var left = Input.is_action_pressed(getMyInput("Left"))
-	var up = Input.is_action_pressed(getMyInput("Up"))
-	var down = Input.is_action_pressed(getMyInput("Down"))
-	var attack = Input.is_action_just_pressed(getMyInput("Attack"))
 	if(right != left):
 		if(right):
 			velocity.x = clamp(velocity.x + ACCELERATION * AIRCONTROLRATIO, -MAXSPEED, MAXSPEED)
@@ -155,23 +171,20 @@ func FallProcess(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0, FRICTION * AIRCONTROLRATIO)
 	
-	velocity.y += GRAVITY * delta
+	velocity.y += GRAVITY * delta * 2
 	DoCustomMove(true)
 	#velocity = move_and_slide(velocity, VECTOR_UP)
 	if(is_on_floor()):
 		setState(States.Walk)
+		
+	#if (jump and time_since_last_ground <= COYOTE_TIME):
+	#	StartJump()
 	
 	if(attack):
 		slash(getDirection(up, right, down, left))
 
 
 func CastProcess(delta):
-	var right = Input.is_action_pressed(getMyInput("Right"))
-	var left = Input.is_action_pressed(getMyInput("Left"))
-	var up = Input.is_action_pressed(getMyInput("Up"))
-	var jump = Input.is_action_just_pressed(getMyInput("Jump"))
-	var down = Input.is_action_pressed(getMyInput("Down"))
-	var attack = Input.is_action_just_pressed(getMyInput("Attack"))
 	if(right != left):
 		if(right):
 			velocity.x = clamp(velocity.x + ACCELERATION, -MAXSPEED, MAXSPEED)
@@ -182,7 +195,7 @@ func CastProcess(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0, FRICTION)
 	if(jump && is_on_floor()):
-		velocity.y = -JUMPFORCE
+		StartJump()
 	velocity.y += GRAVITY * delta
 	
 	DoCustomMove(true)
@@ -193,11 +206,6 @@ func CastProcess(delta):
 
 
 func AttackProcess(delta):
-	var right = Input.is_action_pressed(getMyInput("Right"))
-	var left = Input.is_action_pressed(getMyInput("Left"))
-	var up = Input.is_action_pressed(getMyInput("Up"))
-	var jump = Input.is_action_pressed(getMyInput("Jump"))
-	var down = Input.is_action_pressed(getMyInput("Down"))
 	if(right != left):
 		if(right):
 			velocity.x = clamp(velocity.x + ACCELERATION, -MAXSPEED, MAXSPEED)
@@ -207,9 +215,9 @@ func AttackProcess(delta):
 			$AnimatedSprite.flip_h = true
 	else:
 		velocity.x = lerp(velocity.x, 0, FRICTION)
-	if(jump && is_on_floor()):
-		velocity.y = -JUMPFORCE
-	velocity.y += GRAVITY * delta
+	#if(jump && is_on_floor()):
+	#	StartJump()
+	velocity.y += GRAVITY * delta * 2
 	
 	DoCustomMove(true)#velocity = move_and_slide(velocity, VECTOR_UP)
 	
@@ -308,4 +316,7 @@ func getVectorFromDirection(direction):
 
 func _on_AnimatedSprite_animation_finished():
 	if(state == States.Attack ||state == States.Cast):
-		setState(States.Walk)
+		if time_since_last_ground > COYOTE_TIME:
+			setState(States.Fall)
+		else:
+			setState(States.Walk)
