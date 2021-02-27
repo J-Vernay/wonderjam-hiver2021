@@ -8,6 +8,7 @@ var stuckTimer = 0;
 var isStuck = false;
 var oldLinearVelocity : Vector2
 var oldAngularVelocity : float
+var tween = null
 
 const STUCK_TIME = 4
 
@@ -16,6 +17,8 @@ func _ready():
 	$Sprite.scale.y = SCALEY
 	$CollisionShape2D.scale.x = SCALEX * 0.92
 	$CollisionShape2D.scale.y = SCALEY * 0.92
+	$CPUParticles2D.scale.x = SCALEX
+	$CPUParticles2D.scale.y = SCALEY
 	add_to_group("pushables", true)
 
 func _process(delta):
@@ -24,14 +27,21 @@ func _process(delta):
 		$Sprite.scale.y = SCALEY
 		$CollisionShape2D.scale.x = SCALEX * 0.92
 		$CollisionShape2D.scale.y = SCALEY * 0.92
+		$CPUParticles2D.scale.x = SCALEX
+		$CPUParticles2D.scale.y = SCALEY
 	
 func _physics_process(delta):
 	if(isStuck):
 		stuckTimer += delta
+		
 		if(stuckTimer >= STUCK_TIME):
 			UnStuckIt()
 
 func StuckIt():
+	if tween == null :
+		tween = Tween.new()
+		add_child(tween)
+	
 	isStuck = true
 	stuckTimer = 0
 	oldLinearVelocity = linear_velocity
@@ -40,6 +50,9 @@ func StuckIt():
 	angular_velocity = 0
 	mode = MODE_STATIC
 	remove_from_group("pushables")
+	tween.interpolate_property($Sprite, "self_modulate", Color(0, 2 , 4), Color(1, 1, 1), STUCK_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	$CPUParticles2D.emitting = true
 
 func UnStuckIt():
 	isStuck = false
@@ -47,3 +60,4 @@ func UnStuckIt():
 	linear_velocity = oldLinearVelocity
 	angular_velocity = oldAngularVelocity
 	add_to_group("pushables", true)
+	$Sprite.self_modulate = Color(1, 1 , 1)

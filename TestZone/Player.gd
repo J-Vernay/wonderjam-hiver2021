@@ -65,11 +65,13 @@ func _physics_process(delta):
 				CastProcess(delta)
 			States.Attack:
 				AttackProcess(delta)
-		if(Input.is_action_just_pressed(getMyInput("Activate")) && lastBox != null):
-			if(lastBox.has_method("StuckIt")):
-				lastBox.StuckIt()
-				lastBox = null
-				setState(States.Cast)
+		if(Input.is_action_just_pressed(getMyInput("Activate")) && lastBoxes.size() != 0):
+			for lastBox in lastBoxes:
+				if(lastBox.has_method("StuckIt")):
+					lastBox.StuckIt()
+					lastBox = null
+					setState(States.Cast)
+			lastBoxes = []
 
 func DoCustomMove(do_snap):
 	velocity = move_and_slide_with_snap(velocity, int(do_snap)*SNAPVECTOR, VECTOR_UP, true, 4, deg2rad(60), false)
@@ -283,9 +285,9 @@ func getMyInput(name : String):
 	return name + str(controlMode)
 
 
-var lastBox
+var lastBoxes = []
 func _on_ImpulseZone_body_entered(body):
-	lastBox = body
+	lastBoxes.push_back(body)
 	var impulse = Vector2()
 	var FORCE = 500
 	impulse = getVectorFromDirection(slashDirection)
