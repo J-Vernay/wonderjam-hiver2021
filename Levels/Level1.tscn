@@ -4,7 +4,7 @@
 [ext_resource path="res://Levels/ForegroundTileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Levels/ParallaxBackground.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TestZone/Debris.tscn" type="PackedScene" id=4]
-[ext_resource path="res://TestZone/World.gd" type="Script" id=5]
+[ext_resource path="res://Levels/LevelBase.gd" type="Script" id=5]
 [ext_resource path="res://TestZone/DebrisSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://TestZone/Button.tscn" type="PackedScene" id=7]
 [ext_resource path="res://TestZone/Porte Montante.tscn" type="PackedScene" id=8]
@@ -85,6 +85,11 @@ position = Vector2( 512, -368 )
 scale = Vector2( 1, 2.5 )
 z_index = -1
 isOpening = false
+
+[node name="Checkpoints" type="Node" parent="."]
+
+[node name="Start" type="Node2D" parent="Checkpoints"]
+position = Vector2( 0, 272 )
 [connection signal="activate" from="Button" to="Button/Porte Montante" method="open"]
 [connection signal="desactivate" from="Button" to="Button/Porte Montante" method="close"]
 [connection signal="activate" from="Button2" to="Button2/Porte Montante" method="close"]
