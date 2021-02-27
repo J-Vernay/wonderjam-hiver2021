@@ -5,6 +5,8 @@ extends Node2D
 signal reached_end # trigger for passing to the next level
 signal reset_to_checkpoint(name) # ask parent to reset the scene, then the parent will call goto_checkpoint()
 
+signal put_text(text)
+
 # SYSTÈME DE CHECKPOINT:
 # Chaque checkpoint a un nom.
 # Quand on atteint une zone de checkpoint, la fonction update_checkpoint(name) doit être appelée.
@@ -37,3 +39,6 @@ func goto_checkpoint(name):
 
 func trigger_end(__):
 	emit_signal("reached_end")
+	
+func trigger_text(__, text):
+	emit_signal("put_text", text)
