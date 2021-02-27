@@ -78,7 +78,7 @@ func _physics_process(delta):
 		ObjectProcess(delta)
 		
 		if(myBonus == null):
-			var allBonuses = ["Boost", "Boxes"]
+			var allBonuses = ["Boost", "Boxes", "Thunder"]
 			myBonus = allBonuses[rand_range(0, allBonuses.size())]
 			HUD.setTexture(myBonus)
 
@@ -113,7 +113,7 @@ func IdleProcess(delta):
 	if(attack):
 		slash(getDirection(up, right, down, left))
 
-	
+
 
 func WalkProcess(delta):
 	time_since_last_ground = 0
@@ -306,6 +306,12 @@ func applyObject(object):
 		lastObjectUsed = object
 		objectTimer = 0
 		objectDuration = 5
+	elif(object == "Thunder"):
+		ACCELERATION /= 4
+		MAXSPEED /= 4
+		lastObjectUsed = object
+		objectTimer = 0
+		objectDuration = 5
 
 
 func ObjectProcess(delta):
@@ -332,8 +338,14 @@ func removeObject():
 	if(lastObjectUsed == "Boost"):
 		ACCELERATION /= 2
 		MAXSPEED /= 2
+	elif(lastObjectUsed == "Thunder"):
+		ACCELERATION *= 4
+		MAXSPEED *= 4
 	
 	lastObjectUsed = null
+
+func Stun():
+	applyObject("Thunder")
 
 
 var lastBoxes = []
