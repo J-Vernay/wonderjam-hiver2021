@@ -87,7 +87,7 @@ z_index = -1
 isOpening = false
 [connection signal="activate" from="Button" to="Button/Porte Montante" method="open"]
 [connection signal="desactivate" from="Button" to="Button/Porte Montante" method="close"]
-[connection signal="activate" from="Button2" to="Button2/Porte Montante2" method="open"]
 [connection signal="activate" from="Button2" to="Button2/Porte Montante" method="close"]
-[connection signal="desactivate" from="Button2" to="Button2/Porte Montante2" method="close"]
+[connection signal="activate" from="Button2" to="Button2/Porte Montante2" method="open"]
 [connection signal="desactivate" from="Button2" to="Button2/Porte Montante" method="open"]
+[connection signal="desactivate" from="Button2" to="Button2/Porte Montante2" method="close"]

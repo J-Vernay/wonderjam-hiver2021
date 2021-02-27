@@ -23,7 +23,6 @@ var disableImpulse = false
 var time_since_last_ground = 1000
 var time_since_jump = 0
 
-
 var right = false
 var left = false
 var up = false
@@ -38,7 +37,6 @@ enum States{
 
 func _ready():
 	velocity = Vector2(0, 0)
-	world = get_parent()
 	HUD = $HUD
 
 
