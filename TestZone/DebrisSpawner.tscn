@@ -7,3 +7,4 @@
 script = ExtResource( 2 )
 
 [node name="Debris" parent="." instance=ExtResource( 1 )]
+can_sleep = false

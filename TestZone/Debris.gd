@@ -13,22 +13,12 @@ var tween = null
 const STUCK_TIME = 4
 
 func _ready():
-	$Sprite.scale.x = SCALEX
-	$Sprite.scale.y = SCALEY
-	$CollisionShape2D.scale.x = SCALEX * 0.92
-	$CollisionShape2D.scale.y = SCALEY * 0.92
-	$CPUParticles2D.scale.x = SCALEX
-	$CPUParticles2D.scale.y = SCALEY
+	setScale(SCALEX, SCALEY)
 	add_to_group("pushables", true)
 
 func _process(delta):
 	if Engine.editor_hint:
-		$Sprite.scale.x = SCALEX
-		$Sprite.scale.y = SCALEY
-		$CollisionShape2D.scale.x = SCALEX * 0.92
-		$CollisionShape2D.scale.y = SCALEY * 0.92
-		$CPUParticles2D.scale.x = SCALEX
-		$CPUParticles2D.scale.y = SCALEY
+		setScale(SCALEX, SCALEY)
 	
 func _physics_process(delta):
 	if(isStuck):
