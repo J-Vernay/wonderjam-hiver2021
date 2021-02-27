@@ -26,33 +26,23 @@ tile_data = PoolIntArray( -458763, 0, 1, -458762, 0, 1, -458761, 0, 1, -458760, 
 
 [node name="AllDebris" type="Node" parent="."]
 
-[node name="Debris" parent="AllDebris" groups=[
-"pushables",
-] instance=ExtResource( 4 )]
+[node name="Debris" parent="AllDebris" instance=ExtResource( 4 )]
 position = Vector2( -323.634, 254.712 )
 SCALEX = 1.8
 SCALEY = 1.8
 
-[node name="Debris2" parent="AllDebris" groups=[
-"pushables",
-] instance=ExtResource( 4 )]
+[node name="Debris2" parent="AllDebris" instance=ExtResource( 4 )]
 position = Vector2( 1355.97, 281.682 )
 SCALEX = 2.8
 SCALEY = 2.8
 
-[node name="Debris3" parent="AllDebris" groups=[
-"pushables",
-] instance=ExtResource( 4 )]
+[node name="Debris3" parent="AllDebris" instance=ExtResource( 4 )]
 position = Vector2( 1841.13, 190.736 )
 
-[node name="Debris7" parent="AllDebris" groups=[
-"pushables",
-] instance=ExtResource( 4 )]
+[node name="Debris7" parent="AllDebris" instance=ExtResource( 4 )]
 position = Vector2( 1841.44, 124.215 )
 SCALEX = 1.2
 SCALEY = 1.2
 
-[node name="Debris4" parent="AllDebris" groups=[
-"pushables",
-] instance=ExtResource( 4 )]
+[node name="Debris4" parent="AllDebris" instance=ExtResource( 4 )]
 position = Vector2( 1841.93, 251.546 )
