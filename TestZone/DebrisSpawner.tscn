@@ -5,6 +5,7 @@
 
 [node name="DebrisSpawner" type="Node2D"]
 script = ExtResource( 2 )
+area = null
 
 [node name="Debris" parent="." instance=ExtResource( 1 )]
 can_sleep = false

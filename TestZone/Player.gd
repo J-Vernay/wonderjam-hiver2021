@@ -83,7 +83,7 @@ func DoCustomMove(do_snap):
 	for index in get_slide_count():
 		var collision = get_slide_collision(index)
 		if (collision.collider.is_in_group("pushables")):
-			collision.collider.apply_central_impulse(-collision.normal * PUSH)
+			collision.collider.apply_central_impulse(-collision.normal * PUSH * abs(Vector2(1, 0).dot(collision.normal)))
 
 
 func IdleProcess(delta):
@@ -100,8 +100,7 @@ func IdleProcess(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0, FRICTION)
 	if(jump):
-		velocity.y = -JUMPFORCE
-		setState(States.Jump)
+		StartJump()
 	
 	velocity.y += GRAVITY * delta
 	DoCustomMove(true)

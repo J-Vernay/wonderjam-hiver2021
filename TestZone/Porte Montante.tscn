@@ -11,6 +11,7 @@ extents = Vector2( 8, 40 )
 shader = ExtResource( 3 )
 
 [node name="Porte Montante" type="StaticBody2D"]
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
