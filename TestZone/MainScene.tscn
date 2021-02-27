@@ -47,4 +47,3 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="World" parent="VBoxContainer/ViewportContainer2/Viewport2" instance=ExtResource( 1 )]
-playerNumber = 2

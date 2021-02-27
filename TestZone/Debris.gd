@@ -25,9 +25,11 @@ func StuckIt():
 	linear_velocity = Vector2(0, 0)
 	angular_velocity = 0
 	mode = MODE_STATIC
+	remove_from_group("pushables")
 
 func UnStuckIt():
 	isStuck = false
 	mode = MODE_RIGID
 	linear_velocity = oldLinearVelocity
 	angular_velocity = oldAngularVelocity
+	add_to_group("pushables", true)

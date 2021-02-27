@@ -44,6 +44,7 @@ func _physics_process(delta):
 			if(lastBox.has_method("StuckIt")):
 				lastBox.StuckIt()
 				lastBox = null
+				setState(States.Cast)
 
 func DoCustomMove(do_snap):
 	velocity = move_and_slide_with_snap(velocity, int(do_snap)*SNAPVECTOR, VECTOR_UP, true, 4, deg2rad(50), false)
@@ -306,5 +307,5 @@ func getVectorFromDirection(direction):
 
 
 func _on_AnimatedSprite_animation_finished():
-	if(state == States.Attack):
+	if(state == States.Attack ||state == States.Cast):
 		setState(States.Walk)
