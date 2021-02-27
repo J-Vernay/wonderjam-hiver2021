@@ -102,6 +102,6 @@ func receiveObject(object):
 				_curr_scene_instance.get_node("AllDebris").add_child(box)
 		Objects.Thunder:
 			var thun = thunder.instance()
-			thun.setPosition(player.global_position)
+			thun.setPosition(player.global_position + Vector2(0, 10))
 			_curr_scene_instance.add_child(thun)
 
