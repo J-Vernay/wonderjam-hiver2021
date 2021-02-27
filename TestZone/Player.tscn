@@ -33,20 +33,15 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "Run",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 23 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 21 ) ],
-"loop": false,
-"name": "Cast",
-"speed": 20.0
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "Run",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 32 ), ExtResource( 30 ) ],
 "loop": true,
@@ -57,6 +52,11 @@ animations = [ {
 "loop": true,
 "name": "Fall",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 23 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 21 ) ],
+"loop": false,
+"name": "Cast",
+"speed": 20.0
 }, {
 "frames": [ ExtResource( 17 ), ExtResource( 19 ), ExtResource( 1 ), ExtResource( 22 ) ],
 "loop": false,
@@ -86,7 +86,7 @@ position = Vector2( 0, -5 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
 animation = "Run"
-frame = 5
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -96,12 +96,14 @@ shape = SubResource( 2 )
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 0, -100 )
 current = true
+zoom = Vector2( 1.2, 1.2 )
+drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
 drag_margin_left = 0.4
 drag_margin_top = 1.0
 drag_margin_right = 0.4
-drag_margin_bottom = 1.0
+drag_margin_bottom = 0.0
 
 [node name="ImpulseZone" type="Area2D" parent="."]
 position = Vector2( 40, 0 )
