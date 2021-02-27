@@ -43,22 +43,27 @@ tile_data = PoolIntArray( -65569, 1, 65537, -65568, 1, 65537, -65567, 1, 65537, 
 [node name="DebrisSpawner" parent="AllDebris" instance=ExtResource( 6 )]
 position = Vector2( 1619.58, 226.865 )
 boxSize = Vector2( 2, 2 )
+area = null
 
 [node name="DebrisSpawner2" parent="AllDebris" instance=ExtResource( 6 )]
 position = Vector2( 2547.07, 274.334 )
 boxSize = Vector2( 2, 2 )
+area = null
 
 [node name="DebrisSpawner3" parent="AllDebris" instance=ExtResource( 6 )]
 position = Vector2( 3844.55, 196.325 )
 boxSize = Vector2( 3, 3 )
+area = null
 
 [node name="DebrisSpawner4" parent="AllDebris" instance=ExtResource( 6 )]
 position = Vector2( 4664.6, 193.146 )
 boxSize = Vector2( 1.5, 1.5 )
+area = null
 
 [node name="DebrisSpawner5" parent="AllDebris" instance=ExtResource( 6 )]
 position = Vector2( 5857.77, 288.74 )
 boxSize = Vector2( 1.5, 1.5 )
+area = null
 
 [node name="Checkpoints" type="Node" parent="."]
 
@@ -116,6 +121,6 @@ collision_layer = 17
 [node name="ItemBox2" parent="Items" instance=ExtResource( 4 )]
 position = Vector2( 3136, 32 )
 [connection signal="body_entered" from="Areas/GotoCheckpoint" to="." method="trigger_last_checkpoint" flags=6]
-[connection signal="body_entered" from="Areas/TriggerMiddle" to="." method="trigger_text" flags=6 binds= [ "S'ils exploitent mes recherches..." ]]
 [connection signal="body_entered" from="Areas/TriggerMiddle" to="." method="update_checkpoint" flags=6 binds= [ "Middle" ]]
+[connection signal="body_entered" from="Areas/TriggerMiddle" to="." method="trigger_text" flags=6 binds= [ "S'ils exploitent mes recherches..." ]]
 [connection signal="body_entered" from="Areas/TriggerEnd" to="." method="trigger_end"]

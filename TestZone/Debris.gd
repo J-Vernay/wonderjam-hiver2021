@@ -1,3 +1,4 @@
+class_name Debris
 extends RigidBody2D
 tool
 
@@ -9,6 +10,7 @@ var isStuck = false;
 var oldLinearVelocity : Vector2
 var oldAngularVelocity : float
 var tween = null
+var spawner = null
 
 const STUCK_TIME = 4
 

@@ -1,12 +1,14 @@
 extends Node2D
 tool
 
-const MAXDISTANCE = 1000
+const MAXDISTANCE = 2000
 const GROWTHTIME = 1
 export var boxSize := Vector2(1, 1)
+export(NodePath) var area = null
 
 var growth = true
 var growthTimer = GROWTHTIME
+
 
 func _physics_process(delta):
 	if !Engine.editor_hint:
