@@ -724,7 +724,7 @@ mass = 1.0
 scroll_ignore_camera_zoom = true
 
 [node name="Background" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.2, 1 )
+motion_scale = Vector2( 0.2, 0 )
 motion_offset = Vector2( 0, -340 )
 motion_mirroring = Vector2( 870, 0 )
 __meta__ = {
@@ -740,7 +740,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 300, 180 )
 
 [node name="Buildings" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.4, 1 )
+motion_scale = Vector2( 0.4, 0 )
 motion_offset = Vector2( 0, -340 )
 motion_mirroring = Vector2( 1024, 0 )
 __meta__ = {
@@ -756,7 +756,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 300, 160 )
 
 [node name="Foreground" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.6, 1 )
+motion_scale = Vector2( 0.6, 0 )
 motion_offset = Vector2( 0, -340 )
 motion_mirroring = Vector2( 1196.8, 0 )
 __meta__ = {
