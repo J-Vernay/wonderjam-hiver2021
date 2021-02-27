@@ -11,7 +11,7 @@ var levels := [
 	preload("res://Levels/Level0.tscn"),
 	preload("res://Levels/Level1.tscn"),
 ]
-var curr_lvl := 1
+var curr_lvl := 0
 
 var _curr_scene_instance = null
 var _next_scene_instance = null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Graphics/Adventurer-1.5/Individual Sprites/adventurer-attack2-04.png" type="Texture" id=1]
 [ext_resource path="res://TestZone/Player.gd" type="Script" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://Graphics/kisspng-snowflake-schema-snowflakes-5abb1b5dac6811.8333291915222116777062.png" type="Texture" id=34]
 [ext_resource path="res://Graphics/Thunder/ParticleEffect.png" type="Texture" id=35]
 [ext_resource path="res://TestZone/CameraPlayer.gd" type="Script" id=36]
+[ext_resource path="res://Graphics/Thunder/Bolt.png" type="Texture" id=37]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -49,10 +50,10 @@ animations = [ {
 "name": "Run",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 32 ), ExtResource( 30 ) ],
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
-"name": "Jump",
-"speed": 8.0
+"name": "Run",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 27 ), ExtResource( 28 ) ],
 "loop": true,
@@ -63,6 +64,11 @@ animations = [ {
 "loop": false,
 "name": "Cast",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 32 ), ExtResource( 30 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 8.0
 }, {
 "frames": [ ExtResource( 17 ), ExtResource( 19 ), ExtResource( 1 ), ExtResource( 22 ) ],
 "loop": false,
@@ -138,7 +144,7 @@ disabled = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource( 29 )
-itemsTexture = [ ExtResource( 34 ), ExtResource( 33 ) ]
+itemsTexture = [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 37 ) ]
 
 [node name="Panel" type="Panel" parent="HUD"]
 margin_left = 16.0

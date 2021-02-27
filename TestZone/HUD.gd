@@ -9,7 +9,8 @@ func setTexture(object):
 		index = 0
 	elif(object == "Boxes"):
 		index = 1
-	
+	elif(object == "Thunder"):
+		index = 2
 	if(index == -1 || index >= itemsTexture.size()):
 		$TextureRect.texture = null
 		return

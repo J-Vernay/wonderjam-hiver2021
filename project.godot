@@ -9,13 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Debris",
+"language": "GDScript",
+"path": "res://TestZone/Debris.gd"
+}, {
 "base": "Node2D",
 "class": "LevelBase",
 "language": "GDScript",
 "path": "res://Levels/LevelBase.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://TestZone/Player.gd"
 } ]
 _global_script_class_icons={
-"LevelBase": ""
+"Debris": "",
+"LevelBase": "",
+"Player": ""
 }
 
 [application]

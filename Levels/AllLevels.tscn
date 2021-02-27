@@ -4,10 +4,10 @@
 [ext_resource path="res://Graphics/Montserrat-Light.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Levels/Text.shader" type="Shader" id=3]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 30
 use_mipmaps = true
 use_filter = true
@@ -41,14 +41,14 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="CanvasLayer/ColorRect"]
-material = SubResource( 2 )
+material = SubResource( 1 )
 anchor_right = 1.007
 anchor_bottom = 1.0
 margin_left = 20.2798
 margin_top = 5.59418
 margin_right = 328.28
 margin_bottom = 43.5942
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Je dois m'échapper..."
 __meta__ = {
 "_edit_use_anchors_": false

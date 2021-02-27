@@ -3,7 +3,7 @@ class_name Player
 
 export var controlMode = 1 # Can be 1 or 2 if player 1 or 2
 var world
-var myBonus
+var myBonus = null
 var HUD
 
 const VECTOR_UP = Vector2(0, -1)
@@ -77,11 +77,6 @@ func _physics_process(delta):
 					setState(States.Cast)
 			lastBoxes = []
 		ObjectProcess(delta)
-		
-		if(myBonus == null):
-			var allBonuses = ["Boost", "Boxes", "Thunder"]
-			myBonus = allBonuses[rand_range(0, allBonuses.size())]
-			HUD.setTexture(myBonus)
 
 func DoCustomMove(do_snap):
 	velocity = move_and_slide_with_snap(velocity, int(do_snap)*SNAPVECTOR, VECTOR_UP, true, 4, deg2rad(60), false)
@@ -346,6 +341,17 @@ func removeObject():
 	$AnimatedSprite.self_modulate = Color.white
 	
 	lastObjectUsed = null
+
+
+func getItem():
+	return myBonus
+
+
+func addItem():
+	var allBonuses = ["Boost", "Boxes", "Thunder"]
+	myBonus = allBonuses[rand_range(0, allBonuses.size())]
+	HUD.setTexture(myBonus)
+
 
 func Stun():
 	applyObject("Thunder")
