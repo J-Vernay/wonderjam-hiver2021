@@ -33,6 +33,7 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="Level1" parent="VBoxContainer/ViewportContainer/Viewport1" instance=ExtResource( 2 )]
+otherWorld = NodePath("../../../ViewportContainer2/Viewport2/Level1")
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="VBoxContainer"]
 margin_top = 455.0
@@ -48,3 +49,4 @@ render_target_update_mode = 3
 
 [node name="Level1" parent="VBoxContainer/ViewportContainer2/Viewport2" instance=ExtResource( 2 )]
 playerNumber = 2
+otherWorld = NodePath("../../../ViewportContainer/Viewport1/Level1")
