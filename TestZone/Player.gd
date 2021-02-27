@@ -1,12 +1,15 @@
 extends KinematicBody2D
 
 export var controlMode = 1 # Can be 1 or 2 if player 1 or 2
+var world
+var myBonus
+var HUD
 
 const VECTOR_UP = Vector2(0, -1)
 const SNAPVECTOR = Vector2(0, 10)
-const MAXSPEED = 400
+var MAXSPEED = 400
 const FRICTION = 0.8
-const ACCELERATION = 70
+var ACCELERATION = 70
 const AIRCONTROLRATIO = 0.2
 const GRAVITY = 600
 const JUMPFORCE = 300
@@ -35,6 +38,8 @@ enum States{
 
 func _ready():
 	velocity = Vector2(0, 0)
+	world = get_parent()
+	HUD = $HUD
 
 
 var state = States.Idle
@@ -72,6 +77,12 @@ func _physics_process(delta):
 					lastBox = null
 					setState(States.Cast)
 			lastBoxes = []
+		ObjectProcess(delta)
+		
+		if(myBonus == null):
+			var allBonuses = ["Boost", "Boxes"]
+			myBonus = allBonuses[rand_range(0, allBonuses.size())]
+			HUD.setTexture(myBonus)
 
 func DoCustomMove(do_snap):
 	velocity = move_and_slide_with_snap(velocity, int(do_snap)*SNAPVECTOR, VECTOR_UP, true, 4, deg2rad(60), false)
@@ -284,6 +295,47 @@ func slash(direction):
 
 func getMyInput(name : String):
 	return name + str(controlMode)
+
+
+var objectTimer = 0
+var objectDuration = -1
+var lastObjectUsed
+func applyObject(object):
+	removeObject()
+	if(object == "Boost"):
+		ACCELERATION *= 2
+		MAXSPEED *= 2
+		lastObjectUsed = object
+		objectTimer = 0
+		objectDuration = 5
+
+
+func ObjectProcess(delta):
+	if(objectTimer < objectDuration):
+		objectTimer += delta
+		if(objectTimer >= objectDuration):
+			removeObject()
+	if Input.is_action_just_pressed(getMyInput("Bonus")):
+		UseObject()
+
+
+func UseObject():
+	if(myBonus == null):
+		return
+	world.applyObject(myBonus)
+	HUD.setTexture(null)
+	myBonus = null
+
+
+func removeObject():
+	objectDuration = -1
+	if(lastObjectUsed == null):
+		return
+	if(lastObjectUsed == "Boost"):
+		ACCELERATION /= 2
+		MAXSPEED /= 2
+	
+	lastObjectUsed = null
 
 
 var lastBoxes = []
