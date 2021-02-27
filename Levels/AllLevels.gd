@@ -3,6 +3,8 @@ extends Node2D
 export var SCREEN_WIDTH := 1200
 export var SCREEN_HEIGHT := 900
 
+var thunder = preload("res://TestZone/Thunder.tscn")
+
 var levels := [
 	preload("res://Levels/Level0.tscn"),
 	preload("res://Levels/Level1.tscn"),
@@ -95,5 +97,7 @@ func receiveObject(object):
 				box.global_position = player.global_position + Vector2(50 + rand_range(-20, +20), -50 + rand_range(-20, 20))
 				_curr_scene_instance.get_node("AllDebris").add_child(box)
 		Objects.Thunder:
-			player.applyObject("Thunder")
+			var thun = thunder.instance()
+			thun.setPosition(player.global_position)
+			_curr_scene_instance.add_child(thun)
 
