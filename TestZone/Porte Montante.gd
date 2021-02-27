@@ -3,7 +3,7 @@ tool
 
 export var isOpening = false
 var animationOver = true
-const OPENINGSPEED = 60
+const OPENINGSPEED = 90
 
 func open():
 	isOpening = true

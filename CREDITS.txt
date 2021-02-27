@@ -35,4 +35,5 @@ Nous avons utilisé des ressources dont voici les licenses :
     Par chirag
     https://www.freepng.fr/png-a1ebru/
 
-
+- Eclairs :
+	https://www.pngegg.com/en/png-nlkqd

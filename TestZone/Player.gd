@@ -341,11 +341,15 @@ func removeObject():
 	elif(lastObjectUsed == "Thunder"):
 		ACCELERATION *= 4
 		MAXSPEED *= 4
+		$ThunderEffect.emitting = false
+	$AnimatedSprite.self_modulate = Color.white
 	
 	lastObjectUsed = null
 
 func Stun():
 	applyObject("Thunder")
+	$ThunderEffect.emitting = true
+	$AnimatedSprite.self_modulate = Color.yellow
 
 
 var lastBoxes = []
@@ -385,3 +389,7 @@ func _on_AnimatedSprite_animation_finished():
 			setState(States.Fall)
 		else:
 			setState(States.Walk)
+
+func cameraZoneEnter(target, zoom):
+	$Camera2D.setTarget(target, zoom)
+
