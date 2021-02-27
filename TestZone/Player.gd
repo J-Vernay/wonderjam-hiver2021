@@ -3,8 +3,9 @@ extends KinematicBody2D
 export var controlMode = 1 # Can be 1 or 2 if player 1 or 2
 
 const VECTOR_UP = Vector2(0, -1)
+const SNAPVECTOR = Vector2(0, 10)
 const MAXSPEED = 300
-const FRICTION = 0.2
+const FRICTION = 0.8
 const ACCELERATION = 40
 const AIRCONTROLRATIO = 0.1
 const GRAVITY = 600
@@ -62,7 +63,7 @@ func IdleProcess(delta):
 		setState(States.Jump)
 	
 	velocity.y += GRAVITY * delta
-	velocity = move_and_slide(velocity, VECTOR_UP)
+	velocity = move_and_slide_with_snap(velocity, SNAPVECTOR, VECTOR_UP, true, 4, 0.872665, false)
 	
 	if(attack):
 		slash(getDirection(up, right, down, left))
@@ -90,7 +91,7 @@ func WalkProcess(delta):
 		velocity.y = -JUMPFORCE
 		setState(States.Jump)
 	velocity.y += GRAVITY * delta
-	velocity = move_and_slide(velocity, VECTOR_UP)
+	velocity = move_and_slide_with_snap(velocity, SNAPVECTOR, VECTOR_UP, true, 4, 0.872665, false)
 	
 	if(!is_on_floor()):
 		setState(States.Fall)
