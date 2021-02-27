@@ -1,0 +1,38 @@
+Ce jeu a été réalisé lors de la WonderJam d'Hiver 2021, organisé par l'UQAC.
+
+Il a été créé en 48h par Quentin Mallen et Julien Vernay.
+
+Nous avons utilisé des ressources dont voici les licenses :
+
+- Personnage contrôlable :
+    Animated Pixel Adventurer
+    Par rvros
+    https://rvros.itch.io/animated-pixel-hero
+
+- Background du tutoriel (bg0-layers) :
+    cyberpunk-corridor,  Sideview Sci-Fi – Patreon Collection 
+    Par Luis Zuno @ansimuz
+    http://pixelgameart.org/web/portfolio/sideview-sci-fi-patreon-collection/
+
+- Background du niveau principal (bg-layers) :
+    Cyberpunk Street Environment
+    Par Luis Zuno @ansimuz
+    http://pixelgameart.org/web/portfolio/cyberpunk-street-environment/
+
+- Boîtes :
+    Box
+    Par Alekei
+    https://opengameart.org/content/box-2
+
+
+- Tuiles du premier plan :
+    Recolorisation de Sub-Areas, Super Mario MEGA Tileset
+    Par BMATSANTOS
+    https://www.spriters-resource.com/custom_edited/mariocustoms/sheet/64266/
+
+- Flocons :
+    La Neige, Flocon De Neige, Schéma En Flocon
+    Par chirag
+    https://www.freepng.fr/png-a1ebru/
+
+
