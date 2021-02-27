@@ -29,6 +29,9 @@ func _physics_process(delta):
 		if(stuckTimer >= STUCK_TIME):
 			UnStuckIt()
 
+func setStuckable(stuckable):
+	$Contour.visible = stuckable
+
 func StuckIt():
 	if tween == null :
 		tween = Tween.new()
@@ -59,6 +62,8 @@ func setScale(scaleX, scaleY):
 	SCALEY = scaleY
 	$Sprite.scale.x = SCALEX
 	$Sprite.scale.y = SCALEY
+	$Contour.scale.x = SCALEX
+	$Contour.scale.y = SCALEY
 	$CollisionShape2D.scale.x = SCALEX * 0.92
 	$CollisionShape2D.scale.y = SCALEY * 0.92
 	$CPUParticles2D.scale.x = SCALEX
