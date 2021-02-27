@@ -3,7 +3,7 @@ extends Node2D
 
 
 signal reached_end # trigger for passing to the next level
-signal reset_to_checkpoint(name) # ask parent to reset the scene, then the parent will call goto_checkpoint()
+signal reset_to_checkpoint(pos) # ask parent to reset the scene, then the parent will call goto_checkpoint()
 
 signal put_text(text)
 
@@ -20,14 +20,13 @@ var _player = null
 func _ready():
 	_player = $Player
 	_current_checkpoint = $Checkpoints.get_child(0)
+	goto_checkpoint(_current_checkpoint.name)
 	_player.position = _current_checkpoint.position
-	
+
 	
 func update_checkpoint(__, checkpoint_name):
-	print(checkpoint_name)
 	var checkpoint = $Checkpoints.get_node(checkpoint_name)
-	if checkpoint.get_index() > _current_checkpoint.get_index():
-		print("ok")
+	if checkpoint.get_position_in_parent() > _current_checkpoint.get_position_in_parent():
 		_current_checkpoint = checkpoint
 
 func trigger_last_checkpoint(__):
@@ -35,6 +34,7 @@ func trigger_last_checkpoint(__):
 
 func goto_checkpoint(name):
 	update_checkpoint(null,name)
+	_player.get_node("Camera2D").smoothing_enabled = false
 	_player.position = _current_checkpoint.position
 
 func trigger_end(__):
@@ -42,3 +42,8 @@ func trigger_end(__):
 	
 func trigger_text(__, text):
 	emit_signal("put_text", text)
+
+func _process(delta):
+	var camera = _player.get_node("Camera2D")
+	if camera != null:
+		camera.smoothing_enabled = true

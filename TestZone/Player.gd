@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 export var controlMode = 1 # Can be 1 or 2 if player 1 or 2
 var world
