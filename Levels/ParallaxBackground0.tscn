@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Graphics/bg0-layers/cyberpunk-corridor.png" type="Texture" id=2]
+[ext_resource path="res://Graphics/bg0-layers/back.png" type="Texture" id=3]
+
+[node name="ParallaxBackground0" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
+
+[node name="Background" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.2, 1 )
+motion_offset = Vector2( 0, -340 )
+motion_mirroring = Vector2( 870, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Background"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 300, 180 )
+
+[node name="Buildings" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.4, 1 )
+motion_offset = Vector2( 0, -340 )
+motion_mirroring = Vector2( 5870, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Buildings"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 16, 16, 112, 176 )
+
+[node name="Sprite2" type="Sprite" parent="Buildings"]
+position = Vector2( 445.836, 0 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 144, 16, 224, 176 )
+
+[node name="Sprite3" type="Sprite" parent="Buildings"]
+position = Vector2( 1342.85, 0 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 144, 208, 336, 176 )
+
+[node name="Sprite4" type="Sprite" parent="Buildings"]
+position = Vector2( 2684.82, 0 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 16, 416, 128, 176 )
+
+[node name="Sprite5" type="Sprite" parent="Buildings"]
+position = Vector2( 3194.5, 0 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 160, 416, 336, 176 )
+
+[node name="Sprite6" type="Sprite" parent="Buildings"]
+position = Vector2( 4536.83, 0 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 144, 208, 336, 176 )
