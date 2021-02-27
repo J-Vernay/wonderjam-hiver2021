@@ -265,6 +265,7 @@ func getDirection(up : bool, right : bool, down : bool, left : bool):
 
 var slashDirection
 func slash(direction):
+	lastBoxes = []
 	setState(States.Attack)
 	disableImpulse = true
 	slashDirection = direction

@@ -61,3 +61,13 @@ func UnStuckIt():
 	angular_velocity = oldAngularVelocity
 	add_to_group("pushables", true)
 	$Sprite.self_modulate = Color(1, 1 , 1)
+
+func setScale(scaleX, scaleY):
+	SCALEX = scaleX
+	SCALEY = scaleY
+	$Sprite.scale.x = SCALEX
+	$Sprite.scale.y = SCALEY
+	$CollisionShape2D.scale.x = SCALEX * 0.92
+	$CollisionShape2D.scale.y = SCALEY * 0.92
+	$CPUParticles2D.scale.x = SCALEX
+	$CPUParticles2D.scale.y = SCALEY
