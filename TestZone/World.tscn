@@ -714,7 +714,9 @@ script = ExtResource( 3 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -96, -72 )
 
-[node name="Debris" parent="." instance=ExtResource( 4 )]
+[node name="Debris" parent="." groups=[
+"pushables",
+] instance=ExtResource( 4 )]
 position = Vector2( 21, -36 )
 mass = 1.0
 

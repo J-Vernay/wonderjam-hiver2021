@@ -10,6 +10,7 @@ const ACCELERATION = 40
 const AIRCONTROLRATIO = 0.1
 const GRAVITY = 600
 const JUMPFORCE = 400
+const PUSH = 70
 
 var velocity : Vector2
 var disableImpulse = false
@@ -40,6 +41,13 @@ func _physics_process(delta):
 			States.Attack:
 				AttackProcess(delta)
 
+func DoCustomMove(do_snap):
+	velocity = move_and_slide_with_snap(velocity, int(do_snap)*SNAPVECTOR, VECTOR_UP, true, 4, deg2rad(50), false)
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if (collision.collider.is_in_group("pushables")):
+			collision.collider.apply_central_impulse(-collision.normal * PUSH)
+
 
 func IdleProcess(delta):
 	var right = Input.is_action_pressed(getMyInput("Right"))
@@ -63,7 +71,7 @@ func IdleProcess(delta):
 		setState(States.Jump)
 	
 	velocity.y += GRAVITY * delta
-	velocity = move_and_slide_with_snap(velocity, SNAPVECTOR, VECTOR_UP, true, 4, 0.872665, false)
+	DoCustomMove(true)
 	
 	if(attack):
 		slash(getDirection(up, right, down, left))
@@ -91,7 +99,7 @@ func WalkProcess(delta):
 		velocity.y = -JUMPFORCE
 		setState(States.Jump)
 	velocity.y += GRAVITY * delta
-	velocity = move_and_slide_with_snap(velocity, SNAPVECTOR, VECTOR_UP, true, 4, 0.872665, false)
+	DoCustomMove(true)
 	
 	if(!is_on_floor()):
 		setState(States.Fall)
@@ -117,7 +125,8 @@ func JumpProcess(delta):
 		velocity.x = lerp(velocity.x, 0, FRICTION * AIRCONTROLRATIO)
 	
 	velocity.y += GRAVITY * delta
-	velocity = move_and_slide(velocity, VECTOR_UP)
+	DoCustomMove(false)
+	#velocity = move_and_slide(velocity, VECTOR_UP)
 	if(velocity.y >= 0):
 		setState(States.Fall)
 	
@@ -142,7 +151,8 @@ func FallProcess(delta):
 		velocity.x = lerp(velocity.x, 0, FRICTION * AIRCONTROLRATIO)
 	
 	velocity.y += GRAVITY * delta
-	velocity = move_and_slide(velocity, VECTOR_UP)
+	DoCustomMove(true)
+	#velocity = move_and_slide(velocity, VECTOR_UP)
 	if(is_on_floor()):
 		setState(States.Walk)
 	
@@ -169,7 +179,9 @@ func CastProcess(delta):
 	if(jump && is_on_floor()):
 		velocity.y = -JUMPFORCE
 	velocity.y += GRAVITY * delta
-	velocity = move_and_slide(velocity, VECTOR_UP)
+	
+	DoCustomMove(true)
+	#velocity = move_and_slide(velocity, VECTOR_UP)
 	
 	if(attack):
 		slash(getDirection(up, right, down, left))
@@ -193,7 +205,8 @@ func AttackProcess(delta):
 	if(jump && is_on_floor()):
 		velocity.y = -JUMPFORCE
 	velocity.y += GRAVITY * delta
-	velocity = move_and_slide(velocity, VECTOR_UP)
+	
+	DoCustomMove(true)#velocity = move_and_slide(velocity, VECTOR_UP)
 	
 	if(disableImpulse):
 		$ImpulseZone/CollisionShape2D.disabled = true
