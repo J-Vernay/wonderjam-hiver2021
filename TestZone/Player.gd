@@ -39,6 +39,10 @@ func _physics_process(delta):
 				CastProcess(delta)
 			States.Attack:
 				AttackProcess(delta)
+		if(Input.is_action_just_pressed(getMyInput("Activate")) && lastBox != null):
+			if(lastBox.has_method("StuckIt")):
+				lastBox.StuckIt()
+				lastBox = null
 
 
 func IdleProcess(delta):
@@ -247,18 +251,19 @@ func slash(direction):
 	
 	$ImpulseZone/CollisionShape2D.disabled = false
 	var newPositionVector = getVectorFromDirection(slashDirection)
-	if(newPositionVector.x != 0):
-		if(newPositionVector.x > 0):
-			$ImpulseZone.position.x = abs($ImpulseZone.position.x)
-		else:
-			$ImpulseZone.position.x = -abs($ImpulseZone.position.x)
+	if(!$AnimatedSprite.flip_h):
+		$ImpulseZone.position.x = abs($ImpulseZone.position.x)
+	else:
+		$ImpulseZone.position.x = -abs($ImpulseZone.position.x)
 	
 
 func getMyInput(name : String):
 	return name + str(controlMode)
 
 
+var lastBox
 func _on_ImpulseZone_body_entered(body):
+	lastBox = body
 	var impulse = Vector2()
 	var FORCE = 500
 	impulse = getVectorFromDirection(slashDirection)
