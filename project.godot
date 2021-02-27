@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "LevelBase",
+"language": "GDScript",
+"path": "res://Levels/LevelBase.gd"
+} ]
 _global_script_class_icons={
-
+"LevelBase": ""
 }
 
 [application]
@@ -121,6 +126,7 @@ Activate2={
 2d_physics/layer_2="StaticObject"
 2d_physics/layer_3="Sword"
 2d_physics/layer_4="Debris"
+2d_physics/layer_5="PlayerDetection"
 
 [rendering]
 

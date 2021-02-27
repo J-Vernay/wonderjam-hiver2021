@@ -68,6 +68,7 @@ collision_layer = 0
 position = Vector2( 205.235, -129.104 )
 scale = Vector2( 1, 2.5 )
 z_index = -1
+isOpening = false
 
 [node name="Button2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 4496, 264 )
@@ -83,6 +84,7 @@ isOpening = true
 position = Vector2( 512, -368 )
 scale = Vector2( 1, 2.5 )
 z_index = -1
+isOpening = false
 [connection signal="activate" from="Button" to="Button/Porte Montante" method="open"]
 [connection signal="desactivate" from="Button" to="Button/Porte Montante" method="close"]
 [connection signal="activate" from="Button2" to="Button2/Porte Montante" method="close"]
