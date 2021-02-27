@@ -153,6 +153,60 @@ collision_layer = 16
 scale = Vector2( -0.0502307, 1.51928 )
 shape = SubResource( 1 )
 
+[node name="Text1" type="Area2D" parent="Areas"]
+position = Vector2( 720, 48 )
+scale = Vector2( 0.56, 1.28 )
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text1"]
+scale = Vector2( -0.0502307, 1.51928 )
+shape = SubResource( 1 )
+
+[node name="Text2" type="Area2D" parent="Areas"]
+position = Vector2( 2016, 48 )
+scale = Vector2( 0.24, 1.28 )
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text2"]
+scale = Vector2( -0.0502307, 1.51928 )
+shape = SubResource( 1 )
+
+[node name="Text3" type="Area2D" parent="Areas"]
+position = Vector2( 3504, 3.8147e-06 )
+scale = Vector2( 0.24, 1.28 )
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text3"]
+scale = Vector2( -0.0502307, 1.51928 )
+shape = SubResource( 1 )
+
+[node name="Text4" type="Area2D" parent="Areas"]
+position = Vector2( 4176, 0 )
+scale = Vector2( 0.24, 1.28 )
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text4"]
+scale = Vector2( -0.0502307, 1.51928 )
+shape = SubResource( 1 )
+
+[node name="Text5" type="Area2D" parent="Areas"]
+position = Vector2( 5088, 0 )
+scale = Vector2( 0.24, 1.28 )
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text5"]
+scale = Vector2( -0.0502307, 1.51928 )
+shape = SubResource( 1 )
+
+[node name="Text6" type="Area2D" parent="Areas"]
+position = Vector2( 7008, 0 )
+scale = Vector2( 0.24, 1.28 )
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text6"]
+scale = Vector2( -0.0502307, 1.51928 )
+shape = SubResource( 1 )
+
 [node name="CameraZone" type="Area2D" parent="Areas"]
 position = Vector2( 4472, 80 )
 collision_layer = 0
@@ -176,5 +230,11 @@ shape = SubResource( 2 )
 [connection signal="body_entered" from="Areas/Checkpoint1" to="." method="update_checkpoint" flags=6 binds= [ "1" ]]
 [connection signal="body_entered" from="Areas/Checkpoint2" to="." method="update_checkpoint" flags=6 binds= [ "2" ]]
 [connection signal="body_entered" from="Areas/Checkpoint3" to="." method="update_checkpoint" flags=6 binds= [ "3" ]]
+[connection signal="body_entered" from="Areas/Text1" to="." method="trigger_text" flags=6 binds= [ "Je comprends leur motivation..." ]]
+[connection signal="body_entered" from="Areas/Text2" to="." method="trigger_text" flags=6 binds= [ "\"Tous des pourris\", c'est vrai." ]]
+[connection signal="body_entered" from="Areas/Text3" to="." method="trigger_text" flags=6 binds= [ "Leur haine est justifiée." ]]
+[connection signal="body_entered" from="Areas/Text4" to="." method="trigger_text" flags=6 binds= [ "Mais ils se sont laissés aveuglés !" ]]
+[connection signal="body_entered" from="Areas/Text5" to="." method="trigger_text" flags=6 binds= [ "Et maintenant, toute la ville est en danger !" ]]
+[connection signal="body_entered" from="Areas/Text6" to="." method="trigger_text" flags=6 binds= [ "J'étais si proche du but, et si ignorant..." ]]
 [connection signal="body_entered" from="Areas/CameraZone" to="Areas/CameraZone" method="_on_CameraZone_body_entered"]
 [connection signal="body_exited" from="Areas/CameraZone" to="Areas/CameraZone" method="_on_CameraZone_body_exited"]

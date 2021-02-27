@@ -86,6 +86,31 @@ __meta__ = {
 position = Vector2( 7632, 576 )
 shape = SubResource( 1 )
 
+[node name="Trigger1" type="Area2D" parent="Areas"]
+position = Vector2( 432, -1248 )
+collision_layer = 16
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Trigger1"]
+position = Vector2( -526.761, 1227.82 )
+scale = Vector2( 0.027109, -2.75263 )
+shape = SubResource( 1 )
+
+[node name="Trigger2" type="Area2D" parent="Areas"]
+position = Vector2( 2677.22, -1209.95 )
+collision_layer = 16
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Trigger2"]
+position = Vector2( -526.761, 1227.82 )
+scale = Vector2( 0.027109, -2.75263 )
+shape = SubResource( 1 )
+
 [node name="TriggerMiddle" type="Area2D" parent="Areas"]
 position = Vector2( 432, -1248 )
 collision_layer = 16
@@ -99,12 +124,35 @@ position = Vector2( 3264, 1248 )
 scale = Vector2( 0.027109, -2.75263 )
 shape = SubResource( 1 )
 
-[node name="TriggerEnd" type="Area2D" parent="Areas"]
-position = Vector2( 3648, -1248 )
+[node name="Trigger3" type="Area2D" parent="Areas"]
+position = Vector2( 5118.65, -1228.99 )
 collision_layer = 16
 __meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Trigger3"]
+position = Vector2( -526.761, 1227.82 )
+scale = Vector2( 0.027109, -2.75263 )
+shape = SubResource( 1 )
+
+[node name="Trigger4" type="Area2D" parent="Areas"]
+position = Vector2( 6919.56, -1225.22 )
+collision_layer = 16
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Trigger4"]
+position = Vector2( -526.761, 1227.82 )
+scale = Vector2( 0.027109, -2.75263 )
+shape = SubResource( 1 )
+
+[node name="TriggerEnd" type="Area2D" parent="Areas"]
+position = Vector2( 4044.43, -1244.22 )
+collision_layer = 16
+__meta__ = {
+"_edit_group_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/TriggerEnd"]
@@ -121,6 +169,9 @@ collision_layer = 17
 [node name="ItemBox2" parent="Items" instance=ExtResource( 4 )]
 position = Vector2( 3136, 32 )
 [connection signal="body_entered" from="Areas/GotoCheckpoint" to="." method="trigger_last_checkpoint" flags=6]
+[connection signal="body_entered" from="Areas/Trigger1" to="." method="trigger_text" flags=6 binds= [ "Je dois m'échapper d'ici !" ]]
+[connection signal="body_entered" from="Areas/Trigger2" to="." method="trigger_text" flags=6 binds= [ "Je dois les mettre en sécurité..." ]]
 [connection signal="body_entered" from="Areas/TriggerMiddle" to="." method="update_checkpoint" flags=6 binds= [ "Middle" ]]
-[connection signal="body_entered" from="Areas/TriggerMiddle" to="." method="trigger_text" flags=6 binds= [ "S'ils exploitent mes recherches..." ]]
+[connection signal="body_entered" from="Areas/Trigger3" to="." method="trigger_text" flags=6 binds= [ "S'ils obtiennent mes recherches..." ]]
+[connection signal="body_entered" from="Areas/Trigger4" to="." method="trigger_text" flags=6 binds= [ "Alors nous seront tous morts !" ]]
 [connection signal="body_entered" from="Areas/TriggerEnd" to="." method="trigger_end"]
