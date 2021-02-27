@@ -71,11 +71,9 @@ func _physics_process(delta):
 				AttackProcess(delta)
 		if(Input.is_action_just_pressed(getMyInput("Activate")) && lastBoxes.size() != 0):
 			for lastBox in lastBoxes:
-				if(lastBox.has_method("StuckIt")):
-					lastBox.StuckIt()
-					lastBox = null
-					setState(States.Cast)
-			lastBoxes = []
+				lastBox.StuckIt()
+				setState(States.Cast)
+			removeBoxes()
 		ObjectProcess(delta)
 
 func DoCustomMove(do_snap):
@@ -269,7 +267,7 @@ func getDirection(up : bool, right : bool, down : bool, left : bool):
 
 var slashDirection
 func slash(direction):
-	lastBoxes = []
+	removeBoxes()
 	setState(States.Attack)
 	disableImpulse = true
 	slashDirection = direction
@@ -359,12 +357,23 @@ func Stun():
 
 
 var lastBoxes = []
+
+func appendBox(box):
+	box.setStuckable(true)
+	lastBoxes.push_back(box)
+
+func removeBoxes():
+	for box in lastBoxes:
+		box.setStuckable(false)
+	lastBoxes = []
+
 func _on_ImpulseZone_body_entered(body):
-	lastBoxes.push_back(body)
-	var impulse = Vector2()
-	var FORCE = 500
-	impulse = getVectorFromDirection(slashDirection)
-	body.apply_central_impulse(impulse * FORCE)
+	if body is Debris:
+		appendBox(body)
+		var impulse = Vector2()
+		var FORCE = 500
+		impulse = getVectorFromDirection(slashDirection)
+		body.apply_central_impulse(impulse * FORCE)
 
 
 func getVectorFromDirection(direction):
