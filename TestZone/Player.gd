@@ -136,6 +136,7 @@ func StartJump():
 	velocity.y = -JUMPFORCE
 	setState(States.Jump)
 	time_since_jump = 0
+	$AudioStreamPlayer.play()
 
 func JumpProcess(delta):
 	time_since_last_ground = 1000
@@ -408,3 +409,8 @@ func _on_AnimatedSprite_animation_finished():
 func cameraZoneEnter(target, zoom):
 	$Camera2D.setTarget(target, zoom)
 
+
+
+func _on_AudioStreamPlayer2D_finished():
+	$AudioStreamPlayer.stop()
+	print("yeah")

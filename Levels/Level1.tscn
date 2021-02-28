@@ -10,10 +10,10 @@
 [ext_resource path="res://TestZone/Porte Montante.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Levels/CameraZone.gd" type="Script" id=9]
 
-[sub_resource type="RectangleShape2D" id=137]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4704, 240 )
 
-[sub_resource type="RectangleShape2D" id=138]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 536, 288 )
 
 [node name="Level1" type="Node2D"]
@@ -118,7 +118,7 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Area2D"]
 position = Vector2( 2784, 768 )
-shape = SubResource( 137 )
+shape = SubResource( 1 )
 
 [node name="Checkpoint1" type="Area2D" parent="Areas"]
 position = Vector2( 2256, 96 )
@@ -126,7 +126,7 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Checkpoint1"]
 scale = Vector2( -0.0502307, 1.51928 )
-shape = SubResource( 137 )
+shape = SubResource( 1 )
 
 [node name="Checkpoint2" type="Area2D" parent="Areas"]
 position = Vector2( 5424, 48 )
@@ -136,7 +136,7 @@ collision_layer = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Checkpoint2"]
 position = Vector2( 0, -37.5 )
 scale = Vector2( -0.0502307, 1.51928 )
-shape = SubResource( 137 )
+shape = SubResource( 1 )
 
 [node name="Checkpoint3" type="Area2D" parent="Areas"]
 position = Vector2( 7392, 0 )
@@ -145,7 +145,7 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Checkpoint3"]
 scale = Vector2( -0.0502307, 1.51928 )
-shape = SubResource( 137 )
+shape = SubResource( 1 )
 
 [node name="Text1" type="Area2D" parent="Areas"]
 position = Vector2( 720, 48 )
@@ -154,7 +154,7 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text1"]
 scale = Vector2( -0.0502307, 1.51928 )
-shape = SubResource( 137 )
+shape = SubResource( 1 )
 
 [node name="Text2" type="Area2D" parent="Areas"]
 position = Vector2( 2016, 48 )
@@ -163,7 +163,7 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text2"]
 scale = Vector2( -0.0502307, 1.51928 )
-shape = SubResource( 137 )
+shape = SubResource( 1 )
 
 [node name="Text3" type="Area2D" parent="Areas"]
 position = Vector2( 3504, 3.8147e-06 )
@@ -172,7 +172,7 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text3"]
 scale = Vector2( -0.0502307, 1.51928 )
-shape = SubResource( 137 )
+shape = SubResource( 1 )
 
 [node name="Text4" type="Area2D" parent="Areas"]
 position = Vector2( 4176, 0 )
@@ -181,7 +181,7 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text4"]
 scale = Vector2( -0.0502307, 1.51928 )
-shape = SubResource( 137 )
+shape = SubResource( 1 )
 
 [node name="Text5" type="Area2D" parent="Areas"]
 position = Vector2( 5088, 0 )
@@ -190,7 +190,7 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text5"]
 scale = Vector2( -0.0502307, 1.51928 )
-shape = SubResource( 137 )
+shape = SubResource( 1 )
 
 [node name="Text6" type="Area2D" parent="Areas"]
 position = Vector2( 7008, 0 )
@@ -199,7 +199,7 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text6"]
 scale = Vector2( -0.0502307, 1.51928 )
-shape = SubResource( 137 )
+shape = SubResource( 1 )
 
 [node name="CameraZone" type="Area2D" parent="Areas"]
 position = Vector2( 4472, 80 )
@@ -213,13 +213,13 @@ zoom = Vector2( 1.5, 1.5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/CameraZone"]
 position = Vector2( 0, -48 )
-shape = SubResource( 138 )
+shape = SubResource( 2 )
 [connection signal="activate" from="Button" to="Button/Porte Montante" method="open"]
 [connection signal="desactivate" from="Button" to="Button/Porte Montante" method="close"]
-[connection signal="activate" from="Button2" to="Button2/Porte Montante" method="close"]
 [connection signal="activate" from="Button2" to="Button2/Porte Montante2" method="open"]
-[connection signal="desactivate" from="Button2" to="Button2/Porte Montante" method="open"]
+[connection signal="activate" from="Button2" to="Button2/Porte Montante" method="close"]
 [connection signal="desactivate" from="Button2" to="Button2/Porte Montante2" method="close"]
+[connection signal="desactivate" from="Button2" to="Button2/Porte Montante" method="open"]
 [connection signal="body_entered" from="Areas/Area2D" to="." method="trigger_last_checkpoint"]
 [connection signal="body_entered" from="Areas/Checkpoint1" to="." method="update_checkpoint" flags=6 binds= [ "1" ]]
 [connection signal="body_entered" from="Areas/Checkpoint2" to="." method="update_checkpoint" flags=6 binds= [ "2" ]]
