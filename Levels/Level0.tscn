@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://TestZone/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Levels/ForegroundTileset.tres" type="TileSet" id=2]
@@ -10,6 +10,15 @@
 [ext_resource path="res://Graphics/tuto/mapping_j1_f2.png" type="Texture" id=8]
 [ext_resource path="res://Graphics/tuto/mapping_j2_f1.png" type="Texture" id=9]
 [ext_resource path="res://Graphics/tuto/mapping_j2_f2.png" type="Texture" id=10]
+[ext_resource path="res://Graphics/tuto/jump_j2.png" type="Texture" id=11]
+[ext_resource path="res://Graphics/tuto/jump_j1.png" type="Texture" id=12]
+[ext_resource path="res://Graphics/tuto/spell_j1.png" type="Texture" id=13]
+[ext_resource path="res://Graphics/tuto/slash_j1.png" type="Texture" id=14]
+[ext_resource path="res://Graphics/tuto/spell_j2.png" type="Texture" id=15]
+[ext_resource path="res://Graphics/tuto/slash_j2.png" type="Texture" id=16]
+[ext_resource path="res://Graphics/tuto/item_j1.png" type="Texture" id=17]
+[ext_resource path="res://Graphics/tuto/item_j2.png" type="Texture" id=18]
+[ext_resource path="res://Graphics/tuto/aim_up.png" type="Texture" id=19]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -37,18 +46,72 @@ script = ExtResource( 5 )
 scroll_base_offset = Vector2( 0, 50 )
 scroll_base_scale = Vector2( 1.5, 1 )
 
+[node name="aim_up" type="Sprite" parent="."]
+position = Vector2( 3408, 0 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 19 )
+
 [node name="MappingJ1" type="AnimatedSprite" parent="."]
 position = Vector2( -72.7392, -35.3833 )
 scale = Vector2( 1.93533, 1.90168 )
 frames = SubResource( 2 )
 playing = true
 
+[node name="jump_j1" type="Sprite" parent="MappingJ1"]
+position = Vector2( 236, -6.63452 )
+texture = ExtResource( 12 )
+
+[node name="slash_j1" type="Sprite" parent="MappingJ1"]
+position = Vector2( 1252.88, 69.0881 )
+texture = ExtResource( 14 )
+
+[node name="slash_j1_2" type="Sprite" parent="MappingJ1"]
+position = Vector2( 2344.16, 18.6063 )
+texture = ExtResource( 14 )
+
+[node name="slash_j1_3" type="Sprite" parent="MappingJ1"]
+position = Vector2( 1872.93, 18.6063 )
+texture = ExtResource( 14 )
+
+[node name="spell_j1" type="Sprite" parent="MappingJ1"]
+position = Vector2( 2443.37, 18.6063 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 13 )
+
+[node name="item_j1" type="Sprite" parent="MappingJ1"]
+position = Vector2( 632.831, 18.6063 )
+texture = ExtResource( 17 )
+
 [node name="MappingJ2" type="AnimatedSprite" parent="."]
 position = Vector2( -72.7392, -35.3833 )
-scale = Vector2( 1.93533, 1.90168 )
+scale = Vector2( 2, 2 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
+
+[node name="jump_j2" type="Sprite" parent="MappingJ2"]
+position = Vector2( 228.37, -6.30836 )
+scale = Vector2( 0.967667, 0.950839 )
+texture = ExtResource( 11 )
+
+[node name="slash_j2" type="Sprite" parent="MappingJ2"]
+position = Vector2( 1212.37, 65.6916 )
+texture = ExtResource( 16 )
+
+[node name="slash_j2_2" type="Sprite" parent="MappingJ2"]
+position = Vector2( 2268.37, 17.6916 )
+texture = ExtResource( 16 )
+
+[node name="slash_j2_3" type="Sprite" parent="MappingJ2"]
+position = Vector2( 1812.37, 17.6916 )
+texture = ExtResource( 16 )
+
+[node name="spell_j2" type="Sprite" parent="MappingJ2"]
+position = Vector2( 2364.37, 17.6916 )
+texture = ExtResource( 15 )
+
+[node name="item_j2" type="Sprite" parent="MappingJ2"]
+position = Vector2( 612.37, 17.6916 )
+texture = ExtResource( 18 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -8.75061, 189.426 )
@@ -191,7 +254,7 @@ shape = SubResource( 1 )
 [node name="Items" type="Node" parent="."]
 
 [node name="ItemBox" parent="Items" instance=ExtResource( 4 )]
-position = Vector2( 656, -48 )
+position = Vector2( 1152, 192 )
 collision_layer = 17
 
 [node name="ItemBox2" parent="Items" instance=ExtResource( 4 )]
