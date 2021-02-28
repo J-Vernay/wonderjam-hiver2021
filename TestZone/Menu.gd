@@ -48,7 +48,7 @@ func _process(delta):
 			current_selected = posmod(current_selected + dir, Choices.size())
 			cooldown = 0.3
 			_redraw_menu()
-		elif Input.is_action_pressed("ui_accept"):
+		elif Input.is_action_just_pressed("ui_accept"):
 			match Choices[current_selected]:
 				"1 JOUEUR":
 					var next = main_scene.instance()

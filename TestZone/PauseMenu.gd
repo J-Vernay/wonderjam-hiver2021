@@ -55,7 +55,9 @@ func _process(delta):
 				"Reset Joueur 2":
 					get_parent().resetJoueur2()
 				"QUITTER":
-					get_tree().quit()
+					get_parent().stopPause()
+					get_tree().change_scene("res://TestZone/Menu.tscn")
+					get_tree().get_root().remove_child(get_parent())
 
 var isPaused = false
 func setPause(pause):
