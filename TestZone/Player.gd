@@ -86,6 +86,11 @@ func _physics_process(delta):
 			ObjectProcess(delta)
 		else:
 			move_and_slide(velocity)
+			if(canPassEnd):
+				if(Input.is_action_just_pressed(getMyInput("Jump"))):
+					finish()
+					canPassEnd = false
+				
 
 func DoCustomMove(do_snap):
 	velocity = move_and_slide_with_snap(velocity, int(do_snap)*SNAPVECTOR, VECTOR_UP, true, 4, deg2rad(60), false)
@@ -432,7 +437,7 @@ func hit():
 
 
 func lockMovement():
-	$AnimatedSprite.play("Walk")
+	$AnimatedSprite.play("Run")
 	$AnimatedSprite.flip_h = false
 	velocity = Vector2(MAXSPEED, 0)
 	has_control = false
@@ -441,9 +446,20 @@ func lockMovement():
 	$Camera2D.drag_margin_left = 0
 	$Camera2D.drag_margin_top = 0
 	$Camera2D.smoothing_enabled = false
+	$Camera2D.setTarget($Foot, Vector2(0.6, 0.6))
 
 func teleportConstantBack(body):
 	if(body == self):
 		position.x -= 1600
-		print($Camera2D.smoothing_enabled)
 
+var canPassEnd = false
+func enableNextWorld():
+	canPassEnd = true
+
+func finish():
+	var foot = $Foot
+	var footGlobalPos = foot.global_position
+	remove_child(foot)
+	get_parent().add_child(foot)
+	foot.global_position = footGlobalPos
+	get_parent().finishGame()

@@ -16,6 +16,7 @@ signal put_text(text)
 
 var _current_checkpoint = null
 var _player = null
+var allLevels = null
 
 func _ready():
 	_player = $Player
@@ -54,5 +55,37 @@ func _process(delta):
 		if camera != null:
 			camera.smoothing_enabled = true
 
+var finalScore = 0
 func finishWorld(__):
 	_player.lockMovement()
+	var curr_val = OS.get_ticks_msec() - allLevels.start_of_timer
+	var minutes = int(curr_val / 60000)
+	curr_val = curr_val % 60000
+	var seconds = int(curr_val / 1000)
+	var millisec = curr_val % 1000
+	
+	var text = "%02d:%02d.%03d" % [ minutes, seconds, millisec ]
+	var label = allLevels.stopTimer().duplicate()
+	if(has_node("HUD")):
+		get_node("HUD").add_child(label)
+		label.visible = true
+		var tween = Tween.new()
+		add_child(tween)
+		tween.interpolate_property(label, "margin_left", label.margin_left, 392, 2, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.interpolate_property(label, "margin_top", label.margin_top, 166, 2, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.interpolate_property(label, "margin_right", label.margin_right, 162, 2, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.interpolate_property(label, "margin_bottom", label.margin_bottom, 234, 2, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.interpolate_property(label, "rect_scale", label.rect_scale, Vector2(1.2, 1.2), 2, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.start()
+		var timer = Timer.new()
+		add_child(timer)
+		timer.connect("timeout", _player, "enableNextWorld")
+		timer.set_wait_time(1)
+		timer.start()
+
+func finishGame():
+		var timer = Timer.new()
+		add_child(timer)
+		timer.connect("timeout", self, "trigger_end", [self])
+		timer.set_wait_time(3)
+		timer.start()

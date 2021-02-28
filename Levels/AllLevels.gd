@@ -35,6 +35,7 @@ func _ready():
 	label = $CanvasLayer/ColorRect/Label
 	label_base_x = label.rect_position.x
 	put_text("Je dois m'échapper...")
+	start_of_timer = OS.get_ticks_msec()
 
 
 var last_progress = -1
@@ -57,6 +58,7 @@ func _process(delta):
 		_curr_scene_instance.connect("reached_end", self, "_on_reached_end")
 		_curr_scene_instance.connect("reset_to_checkpoint", self, "_on_reset_to_checkpoint")
 		_curr_scene_instance.connect("put_text", self, "put_text")
+		_curr_scene_instance.allLevels = self
 		player = _curr_scene_instance.get_node("Player")
 		player.controlMode = playerNumber
 		player.world = self
@@ -153,7 +155,7 @@ func _process_text():
 var start_of_timer := 0
 
 func _process_time():
-	var curr_val = OS.get_ticks_msec()
+	var curr_val = OS.get_ticks_msec() - start_of_timer
 	var minutes = int(curr_val / 60000)
 	curr_val = curr_val % 60000
 	var seconds = int(curr_val / 1000)
@@ -162,3 +164,7 @@ func _process_time():
 	var text = "%02d:%02d.%03d" % [ minutes, seconds, millisec ]
 	$CanvasLayer/Time.text = text
 	
+
+func stopTimer():
+	$CanvasLayer/Time.visible = false
+	return $CanvasLayer/Time
