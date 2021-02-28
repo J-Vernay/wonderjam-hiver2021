@@ -1,8 +1,9 @@
-[gd_scene load_steps=152 format=2]
+[gd_scene load_steps=153 format=2]
 
 [ext_resource path="res://Graphics/Montserrat-Light.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Levels/LevelBase.gd" type="Script" id=2]
 [ext_resource path="res://TestZone/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://TestZone/ItemBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TestZone/DebrisSpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Levels/ParallaxBackground.tscn" type="PackedScene" id=6]
 [ext_resource path="res://TestZone/Button.tscn" type="PackedScene" id=7]
@@ -1327,11 +1328,11 @@ boxSize = Vector2( 1.2, 1.2 )
 
 [node name="Checkpoints" type="Node" parent="."]
 
-[node name="1" type="Node2D" parent="Checkpoints"]
-position = Vector2( 2440, -104 )
-
 [node name="Start" type="Node2D" parent="Checkpoints"]
 position = Vector2( -292.412, 284.497 )
+
+[node name="1" type="Node2D" parent="Checkpoints"]
+position = Vector2( 2440, -104 )
 
 [node name="Areas" type="Node" parent="."]
 
@@ -1394,7 +1395,6 @@ position = Vector2( 1906.79, 220.632 )
 position = Vector2( 261.617, 4.72827 )
 scale = Vector2( 1, 2.5 )
 z_index = -1
-isOpening = false
 
 [node name="Button2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 2263.33, 313.13 )
@@ -1403,7 +1403,6 @@ position = Vector2( 2263.33, 313.13 )
 position = Vector2( -94.9229, -410.674 )
 scale = Vector2( 1, 2.5 )
 z_index = -1
-isOpening = false
 
 [node name="Danger" type="Node" parent="."]
 
@@ -1459,6 +1458,12 @@ __meta__ = {
 
 [node name="Timer" type="Timer" parent="HUD"]
 one_shot = true
+
+[node name="ItemBox" parent="." instance=ExtResource( 4 )]
+position = Vector2( 688, 192 )
+
+[node name="ItemBox2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2304, -88 )
 [connection signal="body_entered" from="Areas/Area2D" to="." method="trigger_last_checkpoint"]
 [connection signal="body_entered" from="Areas/End" to="." method="finishWorld"]
 [connection signal="body_entered" from="Areas/Text1" to="." method="trigger_text" flags=6 binds= [ "Ça y est, je vois le bout !" ]]
