@@ -1,5 +1,7 @@
 extends Node2D
 
+signal game_end
+
 var is_one_player_only := false
 
 func one_player_only():
@@ -19,7 +21,7 @@ var levels := [
 	preload("res://Levels/Level3.tscn"),
 	preload("res://Levels/Level4.tscn")
 ]
-var curr_lvl := 0
+var curr_lvl := 4
 
 var _curr_scene_instance = null
 var _next_scene_instance = null
@@ -61,6 +63,7 @@ func _process(delta):
 		_curr_scene_instance.connect("reached_end", self, "_on_reached_end")
 		_curr_scene_instance.connect("reset_to_checkpoint", self, "_on_reset_to_checkpoint")
 		_curr_scene_instance.connect("put_text", self, "put_text")
+		_curr_scene_instance.connect("game_end", self, "_on_game_end")
 		_curr_scene_instance.allLevels = self
 		if is_one_player_only:
 			if _curr_scene_instance.has_node("Items"):
@@ -85,8 +88,10 @@ func _on_reached_end():
 func _on_reset_to_checkpoint(name):
 	_curr_checkpoint_name = name
 	_goto_scene(levels[curr_lvl].instance())
-	$Timer.start()	
-
+	$Timer.start()
+	
+func _on_game_end():
+	emit_signal("game_end")
 
 ###### LOGIC FOR MULTIPLAYER
 

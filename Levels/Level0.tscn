@@ -55,7 +55,6 @@ texture = ExtResource( 19 )
 position = Vector2( -72.7392, -35.3833 )
 scale = Vector2( 1.93533, 1.90168 )
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="jump_j1" type="Sprite" parent="MappingJ1"]
@@ -82,6 +81,7 @@ texture = ExtResource( 13 )
 position = Vector2( -72.7392, -35.3833 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
+frame = 1
 playing = true
 
 [node name="jump_j2" type="Sprite" parent="MappingJ2"]
