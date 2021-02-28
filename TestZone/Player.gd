@@ -89,7 +89,6 @@ func _physics_process(delta):
 			if(canPassEnd):
 				if(Input.is_action_just_pressed(getMyInput("Jump"))):
 					finish()
-					canPassEnd = false
 				
 
 func DoCustomMove(do_snap):
@@ -457,6 +456,7 @@ func enableNextWorld():
 	canPassEnd = true
 
 func finish():
+	canPassEnd = false
 	var foot = $Foot
 	var footGlobalPos = foot.global_position
 	remove_child(foot)

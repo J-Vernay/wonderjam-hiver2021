@@ -79,13 +79,20 @@ func finishWorld(__):
 		tween.start()
 		var timer = Timer.new()
 		add_child(timer)
-		timer.connect("timeout", _player, "enableNextWorld")
-		timer.set_wait_time(1)
+		timer.connect("timeout", self, "enableFinishPossibility")
+		timer.set_wait_time(2)
+		timer.one_shot = true
 		timer.start()
 
+func enableFinishPossibility():
+	_player.enableNextWorld()
+	$HUD/Label.visible = true
+
 func finishGame():
+		$HUD/Label.visible = false
 		var timer = Timer.new()
 		add_child(timer)
 		timer.connect("timeout", self, "trigger_end", [self])
 		timer.set_wait_time(3)
+		timer.one_shot = true
 		timer.start()
