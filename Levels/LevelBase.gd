@@ -40,6 +40,9 @@ func trigger_last_checkpoint(__):
 
 func goto_checkpoint(name):
 	update_checkpoint(null,name)
+	goto_last_checkpoint()
+
+func goto_last_checkpoint():
 	_player.get_node("Camera2D").smoothing_enabled = false
 	_player.position = _current_checkpoint.position
 

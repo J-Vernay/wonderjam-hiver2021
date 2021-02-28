@@ -85,8 +85,7 @@ func _on_reached_end():
 func _on_reset_to_checkpoint(name):
 	_curr_checkpoint_name = name
 	_goto_scene(levels[curr_lvl].instance())
-	$Timer.start()
-	
+	$Timer.start()	
 
 
 ###### LOGIC FOR MULTIPLAYER

@@ -1,10 +1,24 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Levels/AllLevels.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sounds/Cyberpunk City.ogg" type="AudioStream" id=2]
 [ext_resource path="res://TestZone/MainScene.gd" type="Script" id=3]
+[ext_resource path="res://Graphics/joystix monospace.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://TestZone/PauseMenu.gd" type="Script" id=5]
+[ext_resource path="res://Sounds/cyberpunk-street.ogg" type="AudioStream" id=6]
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_bottom = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.470588 )
 
 [node name="MainScene" type="Node"]
+pause_mode = 2
 script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -16,6 +30,7 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+pause_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 10
@@ -57,3 +72,51 @@ otherWorld = NodePath("../../../ViewportContainer/Viewport1/AllLevels1")
 stream = ExtResource( 2 )
 volume_db = -80.0
 autoplay = true
+
+[node name="PauseMenu" type="Node2D" parent="."]
+pause_mode = 2
+script = ExtResource( 5 )
+
+[node name="LabelModel" type="Label" parent="PauseMenu"]
+margin_left = -514.0
+margin_top = 122.0
+margin_right = -64.0
+margin_bottom = 222.0
+custom_fonts/font = SubResource( 2 )
+text = "1 JOUEUR"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PauseMenu"]
+stream = ExtResource( 6 )
+volume_db = -15.0
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PauseMenu"]
+layer = -1
+
+[node name="Panel" type="Panel" parent="PauseMenu/CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Root" type="CenterContainer" parent="PauseMenu/CanvasLayer"]
+margin_top = 300.0
+margin_right = 1200.0
+margin_bottom = 800.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Choices" type="VBoxContainer" parent="PauseMenu/CanvasLayer/Root"]
+margin_left = 600.0
+margin_top = 250.0
+margin_right = 600.0
+margin_bottom = 250.0
+alignment = 1
