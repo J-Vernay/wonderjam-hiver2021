@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://TestZone/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Levels/ForegroundTileset.tres" type="TileSet" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://TestZone/Button.tscn" type="PackedScene" id=7]
 [ext_resource path="res://TestZone/Porte Montante.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Levels/CameraZone.gd" type="Script" id=9]
+[ext_resource path="res://TestZone/ItemBox.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4704, 240 )
@@ -60,11 +61,11 @@ SCALEY = 1.2
 position = Vector2( 1841.93, 251.546 )
 
 [node name="DebrisSpawner" parent="AllDebris" instance=ExtResource( 6 )]
-position = Vector2( 2966.65, 293.668 )
+position = Vector2( 2733.33, 314.697 )
 boxSize = Vector2( 2, 2 )
 
 [node name="DebrisSpawner2" parent="AllDebris" instance=ExtResource( 6 )]
-position = Vector2( 3540.63, 237.605 )
+position = Vector2( 3533.7, 249.113 )
 
 [node name="DebrisSpawner3" parent="AllDebris" instance=ExtResource( 6 )]
 position = Vector2( 4280, 200 )
@@ -234,6 +235,17 @@ zoom = Vector2( 1.5, 1.5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/CameraZone"]
 position = Vector2( 0, -48 )
 shape = SubResource( 2 )
+
+[node name="Items" type="Node" parent="."]
+
+[node name="ItemBox" parent="Items" instance=ExtResource( 10 )]
+position = Vector2( 576, 96 )
+
+[node name="ItemBox2" parent="Items" instance=ExtResource( 10 )]
+position = Vector2( 2880, 336 )
+
+[node name="ItemBox3" parent="Items" instance=ExtResource( 10 )]
+position = Vector2( 5088, 144 )
 [connection signal="activate" from="Button" to="Button/Porte Montante" method="open"]
 [connection signal="desactivate" from="Button" to="Button/Porte Montante" method="close"]
 [connection signal="activate" from="Button2" to="Button2/Porte Montante2" method="open"]

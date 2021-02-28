@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=2]
+[gd_scene load_steps=148 format=2]
 
 [ext_resource path="res://Levels/LevelBase.gd" type="Script" id=1]
 [ext_resource path="res://Graphics/fg0-tileset.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://TestZone/Porte Montante.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Levels/ParallaxBackground.tscn" type="PackedScene" id=8]
 [ext_resource path="res://TestZone/Debris.tscn" type="PackedScene" id=9]
+[ext_resource path="res://TestZone/ItemBox.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -1317,14 +1318,14 @@ position = Vector2( 5016.47, 290.788 )
 
 [node name="Checkpoints" type="Node" parent="."]
 
-[node name="2" type="Node2D" parent="Checkpoints"]
-position = Vector2( 3367.13, 284.22 )
-
 [node name="Start" type="Node2D" parent="Checkpoints"]
 position = Vector2( -157.519, 351.725 )
 
 [node name="1" type="Node2D" parent="Checkpoints"]
 position = Vector2( 1484.8, 256.502 )
+
+[node name="2" type="Node2D" parent="Checkpoints"]
+position = Vector2( 3367.13, 284.22 )
 
 [node name="Areas" type="Node" parent="."]
 
@@ -1399,11 +1400,38 @@ scale = Vector2( -0.0502307, 1.51928 )
 shape = SubResource( 137 )
 
 [node name="Text6" type="Area2D" parent="Areas"]
-position = Vector2( 3572.53, 33.683 )
+position = Vector2( 4392.77, -39.8561 )
 scale = Vector2( 0.2, 1.28 )
 collision_layer = 16
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text6"]
+scale = Vector2( -0.0502307, 1.51928 )
+shape = SubResource( 137 )
+
+[node name="Text8" type="Area2D" parent="Areas"]
+position = Vector2( 5820.82, 3.30083 )
+scale = Vector2( 0.2, 1.28 )
+collision_layer = 16
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text8"]
+scale = Vector2( -0.0502307, 1.51928 )
+shape = SubResource( 137 )
+
+[node name="Text7" type="Area2D" parent="Areas"]
+position = Vector2( 4570.96, 180.761 )
+scale = Vector2( 0.126018, 0.482336 )
+collision_layer = 16
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text7"]
 scale = Vector2( -0.0502307, 1.51928 )
 shape = SubResource( 137 )
 
@@ -1435,6 +1463,17 @@ rotation = 3.14159
 scale = Vector2( 1, 4 )
 z_index = -1
 isOpening = false
+
+[node name="Items" type="Node" parent="."]
+
+[node name="ItemBox" parent="Items" instance=ExtResource( 10 )]
+position = Vector2( 528, 240 )
+
+[node name="ItemBox2" parent="Items" instance=ExtResource( 10 )]
+position = Vector2( 2160, 240 )
+
+[node name="ItemBox3" parent="Items" instance=ExtResource( 10 )]
+position = Vector2( 3552, 336 )
 [connection signal="body_entered" from="Areas/Area2D" to="." method="trigger_last_checkpoint"]
 [connection signal="body_entered" from="Areas/Checkpoint1" to="." method="update_checkpoint" flags=6 binds= [ "1" ]]
 [connection signal="body_entered" from="Areas/Checkpoint2" to="." method="update_checkpoint" flags=6 binds= [ "2" ]]
@@ -1444,6 +1483,8 @@ isOpening = false
 [connection signal="body_entered" from="Areas/Text3" to="." method="trigger_text" flags=6 binds= [ "Pouvoir figer des corps, ce n'est pas rien !" ]]
 [connection signal="body_entered" from="Areas/Text5" to="." method="trigger_text" flags=6 binds= [ "Alors pourquoi ?" ]]
 [connection signal="body_entered" from="Areas/Text6" to="." method="trigger_text" flags=6 binds= [ "Pourquoi dans ce monde, la science doit-elle servir la vengeance ?" ]]
+[connection signal="body_entered" from="Areas/Text8" to="." method="trigger_text" flags=6 binds= [ "La destruction n'est pas la réponse !" ]]
+[connection signal="body_entered" from="Areas/Text7" to="." method="trigger_text" flags=6 binds= [ "Cette société a beau être digne d'un dystopie..." ]]
 [connection signal="body_entered" from="Areas/Text4" to="." method="trigger_text" flags=6 binds= [ "Les applications civiles étaient innombrables !" ]]
 [connection signal="activate" from="Button" to="Button/Porte Montante" method="open"]
 [connection signal="desactivate" from="Button" to="Button/Porte Montante" method="close"]
