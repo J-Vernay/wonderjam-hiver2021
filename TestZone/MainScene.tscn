@@ -7,14 +7,14 @@
 [ext_resource path="res://TestZone/PauseMenu.gd" type="Script" id=5]
 [ext_resource path="res://Sounds/cyberpunk-street.ogg" type="AudioStream" id=6]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 40
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_bottom = 20
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.470588 )
 
 [node name="MainScene" type="Node"]
@@ -82,7 +82,7 @@ margin_left = -514.0
 margin_top = 122.0
 margin_right = -64.0
 margin_bottom = 222.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "1 JOUEUR"
 align = 1
 valign = 1
@@ -101,7 +101,7 @@ layer = -1
 [node name="Panel" type="Panel" parent="PauseMenu/CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -120,3 +120,5 @@ margin_top = 250.0
 margin_right = 600.0
 margin_bottom = 250.0
 alignment = 1
+[connection signal="game_end" from="VBoxContainer/ViewportContainer/Viewport1/AllLevels1" to="." method="_on_game_end"]
+[connection signal="game_end" from="VBoxContainer/ViewportContainer2/Viewport2/AllLevels2" to="." method="_on_game_end"]
