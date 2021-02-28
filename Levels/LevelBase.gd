@@ -93,6 +93,6 @@ func finishGame():
 		var timer = Timer.new()
 		add_child(timer)
 		timer.connect("timeout", self, "trigger_end", [self])
-		timer.set_wait_time(3)
+		timer.set_wait_time(3) #3 secondes pour permettre de voir le joueur s'en aller de l'écran avant de charger la nouvelle scene
 		timer.one_shot = true
 		timer.start()
