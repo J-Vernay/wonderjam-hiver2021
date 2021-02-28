@@ -49,12 +49,7 @@ var state = States.Idle
 func _physics_process(delta):
 	if(!Engine.editor_hint):
 		if(has_control):
-			right = Input.is_action_pressed(getMyInput("Right"))
-			left = Input.is_action_pressed(getMyInput("Left"))
-			up = Input.is_action_pressed(getMyInput("Up"))
-			jump = Input.is_action_pressed(getMyInput("Jump"))
-			down = Input.is_action_pressed(getMyInput("Down"))
-			attack = Input.is_action_just_pressed(getMyInput("Attack"))
+			update_controls()
 			
 			time_since_last_ground += delta
 			time_since_jump += delta
@@ -464,6 +459,28 @@ func finish():
 	foot.global_position = footGlobalPos
 	get_parent().finishGame()
 
+var is_one_player_only := false
+
+func check_both_controls(name):
+	return Input.is_action_pressed(name+"1") or Input.is_action_pressed(name+"2")
+
+func update_controls():
+	if is_one_player_only:
+		right = check_both_controls("Right")
+		left = check_both_controls("Left")
+		up = check_both_controls("Up")
+		jump = check_both_controls("Jump")
+		down = check_both_controls("Down")
+		attack = check_both_controls("Attack")
+	else:
+		right = Input.is_action_pressed(getMyInput("Right"))
+		left = Input.is_action_pressed(getMyInput("Left"))
+		up = Input.is_action_pressed(getMyInput("Up"))
+		jump = Input.is_action_pressed(getMyInput("Jump"))
+		down = Input.is_action_pressed(getMyInput("Down"))
+		attack = Input.is_action_just_pressed(getMyInput("Attack"))
 
 func one_player_only():
 	$HUD.scale.x = 0
+	is_one_player_only = true
+	print("OnePlayerOnly")

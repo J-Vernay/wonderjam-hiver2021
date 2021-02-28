@@ -67,7 +67,8 @@ func _process(delta):
 				_curr_scene_instance.remove_child(_curr_scene_instance.get_node("Items"))
 		player = _curr_scene_instance.get_node("Player")
 		player.controlMode = playerNumber
-		player.one_player_only()
+		if is_one_player_only:
+			player.one_player_only()
 		player.world = self
 		
 		$SceneParent.add_child(_curr_scene_instance)

@@ -1459,6 +1459,7 @@ position = Vector2( 1810.93, 74.3159 )
 position = Vector2( 349.07, -74.3159 )
 scale = Vector2( 1, 2.5 )
 z_index = -1
+isOpening = false
 
 [node name="Button2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 2827.53, 267.329 )
@@ -1468,6 +1469,7 @@ position = Vector2( -115.53, -115.329 )
 rotation = -1.5708
 scale = Vector2( 1, 1.5 )
 z_index = -1
+isOpening = false
 
 [node name="Button3" parent="." instance=ExtResource( 5 )]
 position = Vector2( 5025.76, 360.523 )
@@ -1476,6 +1478,7 @@ position = Vector2( 5025.76, 360.523 )
 position = Vector2( 353.083, -270.26 )
 scale = Vector2( 1, 2.5 )
 z_index = -1
+isOpening = false
 
 [node name="Items" type="Node" parent="."]
 
@@ -1493,7 +1496,7 @@ position = Vector2( 4191.95, 1.18918 )
 [connection signal="body_entered" from="Areas/Checkpoint3" to="." method="trigger_end"]
 [connection signal="body_entered" from="Areas/Text1" to="." method="trigger_text" flags=6 binds= [ "C'est pourquoi je dois prévenir les autorités !" ]]
 [connection signal="body_entered" from="Areas/Text2" to="." method="trigger_text" flags=6 binds= [ "Même si elles ne sont pas dignes de confiance..." ]]
-[connection signal="body_entered" from="Areas/Text3" to="." method="trigger_text" flags=6 binds= [ "Elles seules peuvent les arrêter !" ]]
+[connection signal="body_entered" from="Areas/Text3" to="." method="trigger_text" flags=6 binds= [ "Elles seules peuvent arrêter cette folie !" ]]
 [connection signal="body_entered" from="Areas/Text4" to="." method="trigger_text" flags=6 binds= [ "Et sauver tous les habitants de cette ville." ]]
 [connection signal="body_entered" from="Areas/CameraZone" to="Areas/CameraZone" method="_on_CameraZone_body_entered"]
 [connection signal="body_exited" from="Areas/CameraZone" to="Areas/CameraZone" method="_on_CameraZone_body_exited"]

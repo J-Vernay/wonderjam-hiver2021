@@ -1396,6 +1396,7 @@ scale = Vector2( 0.2, 1.28 )
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text5"]
+position = Vector2( 570.406, -33.275 )
 scale = Vector2( -0.0502307, 1.51928 )
 shape = SubResource( 137 )
 
@@ -1411,18 +1412,6 @@ __meta__ = {
 scale = Vector2( -0.0502307, 1.51928 )
 shape = SubResource( 137 )
 
-[node name="Text8" type="Area2D" parent="Areas"]
-position = Vector2( 5820.82, 3.30083 )
-scale = Vector2( 0.2, 1.28 )
-collision_layer = 16
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text8"]
-scale = Vector2( -0.0502307, 1.51928 )
-shape = SubResource( 137 )
-
 [node name="Text7" type="Area2D" parent="Areas"]
 position = Vector2( 4570.96, 180.761 )
 scale = Vector2( 0.126018, 0.482336 )
@@ -1432,6 +1421,18 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text7"]
+scale = Vector2( -0.0502307, 1.51928 )
+shape = SubResource( 137 )
+
+[node name="Text8" type="Area2D" parent="Areas"]
+position = Vector2( 5820.82, 3.30083 )
+scale = Vector2( 0.2, 1.28 )
+collision_layer = 16
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text8"]
 scale = Vector2( -0.0502307, 1.51928 )
 shape = SubResource( 137 )
 
@@ -1478,13 +1479,13 @@ position = Vector2( 3552, 336 )
 [connection signal="body_entered" from="Areas/Checkpoint1" to="." method="update_checkpoint" flags=6 binds= [ "1" ]]
 [connection signal="body_entered" from="Areas/Checkpoint2" to="." method="update_checkpoint" flags=6 binds= [ "2" ]]
 [connection signal="body_entered" from="Areas/End" to="." method="trigger_end" flags=6]
-[connection signal="body_entered" from="Areas/Text1" to="." method="trigger_text" flags=6 binds= [ "Ils ont financé ma thèse, et mes travaux." ]]
+[connection signal="body_entered" from="Areas/Text1" to="." method="trigger_text" flags=6 binds= [ "La Résistance a financé ma thèse, et mes travaux." ]]
 [connection signal="body_entered" from="Areas/Text2" to="." method="trigger_text" flags=6 binds= [ "Une révolution en physique fondamentale !" ]]
 [connection signal="body_entered" from="Areas/Text3" to="." method="trigger_text" flags=6 binds= [ "Pouvoir figer des corps, ce n'est pas rien !" ]]
 [connection signal="body_entered" from="Areas/Text5" to="." method="trigger_text" flags=6 binds= [ "Alors pourquoi ?" ]]
-[connection signal="body_entered" from="Areas/Text6" to="." method="trigger_text" flags=6 binds= [ "Pourquoi dans ce monde, la science doit-elle servir la vengeance ?" ]]
-[connection signal="body_entered" from="Areas/Text8" to="." method="trigger_text" flags=6 binds= [ "La destruction n'est pas la réponse !" ]]
+[connection signal="body_entered" from="Areas/Text6" to="." method="trigger_text" flags=6 binds= [ "Pourquoi cette découverte doit servir à cela ?" ]]
 [connection signal="body_entered" from="Areas/Text7" to="." method="trigger_text" flags=6 binds= [ "Cette société a beau être digne d'un dystopie..." ]]
+[connection signal="body_entered" from="Areas/Text8" to="." method="trigger_text" flags=6 binds= [ "L'annihilation n'est pas la solution !" ]]
 [connection signal="body_entered" from="Areas/Text4" to="." method="trigger_text" flags=6 binds= [ "Les applications civiles étaient innombrables !" ]]
 [connection signal="activate" from="Button" to="Button/Porte Montante" method="open"]
 [connection signal="desactivate" from="Button" to="Button/Porte Montante" method="close"]

@@ -259,7 +259,7 @@ position = Vector2( 5088, 144 )
 [connection signal="body_entered" from="Areas/End" to="." method="trigger_end" flags=6]
 [connection signal="body_entered" from="Areas/Text1" to="." method="trigger_text" flags=6 binds= [ "Je comprends leur motivation..." ]]
 [connection signal="body_entered" from="Areas/Text2" to="." method="trigger_text" flags=6 binds= [ "\"Tous des pourris\", c'est vrai." ]]
-[connection signal="body_entered" from="Areas/Text3" to="." method="trigger_text" flags=6 binds= [ "Leur haine est justifiée." ]]
+[connection signal="body_entered" from="Areas/Text3" to="." method="trigger_text" flags=6 binds= [ "Leur haine est compréhensible." ]]
 [connection signal="body_entered" from="Areas/Text4" to="." method="trigger_text" flags=6 binds= [ "Mais ils se sont laissés aveuglés !" ]]
 [connection signal="body_entered" from="Areas/Text5" to="." method="trigger_text" flags=6 binds= [ "Et maintenant, toute la ville est en danger !" ]]
 [connection signal="body_entered" from="Areas/Text6" to="." method="trigger_text" flags=6 binds= [ "J'étais si proche du but, et si ignorant..." ]]

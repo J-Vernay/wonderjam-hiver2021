@@ -262,8 +262,8 @@ scale = Vector2( 1.93533, 1.90168 )
 texture = ExtResource( 17 )
 [connection signal="body_entered" from="Areas/GotoCheckpoint" to="." method="trigger_last_checkpoint" flags=6]
 [connection signal="body_entered" from="Areas/Trigger1" to="." method="trigger_text" flags=6 binds= [ "Je dois m'échapper d'ici !" ]]
-[connection signal="body_entered" from="Areas/Trigger2" to="." method="trigger_text" flags=6 binds= [ "Je dois les mettre en sécurité..." ]]
+[connection signal="body_entered" from="Areas/Trigger2" to="." method="trigger_text" flags=6 binds= [ "Je dois mettre mes recherches en sécurité..." ]]
 [connection signal="body_entered" from="Areas/TriggerMiddle" to="." method="update_checkpoint" flags=6 binds= [ "Middle" ]]
-[connection signal="body_entered" from="Areas/Trigger3" to="." method="trigger_text" flags=6 binds= [ "S'ils obtiennent mes recherches..." ]]
+[connection signal="body_entered" from="Areas/Trigger3" to="." method="trigger_text" flags=6 binds= [ "Si la Résistance les obtient..." ]]
 [connection signal="body_entered" from="Areas/Trigger4" to="." method="trigger_text" flags=6 binds= [ "Alors nous serons tous morts !" ]]
 [connection signal="body_entered" from="Areas/TriggerEnd" to="." method="trigger_end"]

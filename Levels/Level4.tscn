@@ -1355,11 +1355,26 @@ scale = Vector2( -0.0502307, 1.51928 )
 shape = SubResource( 138 )
 
 [node name="Text1" type="Area2D" parent="Areas"]
-position = Vector2( 720, 48 )
-scale = Vector2( 0.56, 1.28 )
+position = Vector2( -168, 164 )
+scale = Vector2( -0.437758, 2.14218 )
 collision_layer = 16
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text1"]
+scale = Vector2( -0.0502307, 1.51928 )
+shape = SubResource( 137 )
+
+[node name="Text2" type="Area2D" parent="Areas"]
+position = Vector2( 1756.68, -28.0203 )
+scale = Vector2( -0.437758, 5.38218 )
+collision_layer = 16
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Text2"]
 scale = Vector2( -0.0502307, 1.51928 )
 shape = SubResource( 137 )
 
@@ -1426,7 +1441,8 @@ __meta__ = {
 }
 [connection signal="body_entered" from="Areas/Area2D" to="." method="trigger_last_checkpoint"]
 [connection signal="body_entered" from="Areas/End" to="." method="finishWorld"]
-[connection signal="body_entered" from="Areas/Text1" to="." method="trigger_text" flags=6 binds= [ "Je comprends leur motivation..." ]]
+[connection signal="body_entered" from="Areas/Text1" to="." method="trigger_text" flags=6 binds= [ "Ça y est, je vois le bout !" ]]
+[connection signal="body_entered" from="Areas/Text2" to="." method="trigger_text" flags=6 binds= [ "La fin de tout ce non-sens est là !" ]]
 [connection signal="body_entered" from="Areas/TeleportZone" to="Player" method="teleportConstantBack"]
 [connection signal="activate" from="Button" to="Button/Porte Montante" method="open"]
 [connection signal="desactivate" from="Button" to="Button/Porte Montante" method="close"]
