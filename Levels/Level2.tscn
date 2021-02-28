@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=2]
+[gd_scene load_steps=148 format=2]
 
 [ext_resource path="res://Levels/LevelBase.gd" type="Script" id=1]
 [ext_resource path="res://Graphics/fg0-tileset.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://TestZone/Porte Montante.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Levels/ParallaxBackground.tscn" type="PackedScene" id=8]
 [ext_resource path="res://TestZone/Debris.tscn" type="PackedScene" id=9]
+[ext_resource path="res://TestZone/ItemBox.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -1462,6 +1463,17 @@ rotation = 3.14159
 scale = Vector2( 1, 4 )
 z_index = -1
 isOpening = false
+
+[node name="Items" type="Node" parent="."]
+
+[node name="ItemBox" parent="Items" instance=ExtResource( 10 )]
+position = Vector2( 528, 240 )
+
+[node name="ItemBox2" parent="Items" instance=ExtResource( 10 )]
+position = Vector2( 2160, 240 )
+
+[node name="ItemBox3" parent="Items" instance=ExtResource( 10 )]
+position = Vector2( 3552, 336 )
 [connection signal="body_entered" from="Areas/Area2D" to="." method="trigger_last_checkpoint"]
 [connection signal="body_entered" from="Areas/Checkpoint1" to="." method="update_checkpoint" flags=6 binds= [ "1" ]]
 [connection signal="body_entered" from="Areas/Checkpoint2" to="." method="update_checkpoint" flags=6 binds= [ "2" ]]

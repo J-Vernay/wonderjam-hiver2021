@@ -20,7 +20,7 @@
 [ext_resource path="res://Graphics/tuto/item_j2.png" type="Texture" id=18]
 [ext_resource path="res://Graphics/tuto/aim_up.png" type="Texture" id=19]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
@@ -28,7 +28,7 @@ animations = [ {
 "speed": 1.0
 } ]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
@@ -36,7 +36,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 14165, 142.738 )
 
 [node name="Level0" type="Node2D"]
@@ -54,7 +54,8 @@ texture = ExtResource( 19 )
 [node name="MappingJ1" type="AnimatedSprite" parent="."]
 position = Vector2( -72.7392, -35.3833 )
 scale = Vector2( 1.93533, 1.90168 )
-frames = SubResource( 2 )
+frames = SubResource( 1 )
+frame = 1
 playing = true
 
 [node name="jump_j1" type="Sprite" parent="MappingJ1"]
@@ -75,7 +76,6 @@ texture = ExtResource( 14 )
 
 [node name="spell_j1" type="Sprite" parent="MappingJ1"]
 position = Vector2( 2443.37, 18.6063 )
-scale = Vector2( 1, 1 )
 texture = ExtResource( 13 )
 
 [node name="item_j1" type="Sprite" parent="MappingJ1"]
@@ -85,7 +85,8 @@ texture = ExtResource( 17 )
 [node name="MappingJ2" type="AnimatedSprite" parent="."]
 position = Vector2( -72.7392, -35.3833 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 3 )
+frames = SubResource( 2 )
+frame = 1
 playing = true
 
 [node name="jump_j2" type="Sprite" parent="MappingJ2"]
@@ -175,7 +176,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/GotoCheckpoint"]
 position = Vector2( 7632, 576 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Trigger1" type="Area2D" parent="Areas"]
 position = Vector2( 432, -1248 )
@@ -188,7 +189,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Trigger1"]
 position = Vector2( -526.761, 1227.82 )
 scale = Vector2( 0.027109, -2.75263 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Trigger2" type="Area2D" parent="Areas"]
 position = Vector2( 2677.22, -1209.95 )
@@ -200,7 +201,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Trigger2"]
 position = Vector2( -526.761, 1227.82 )
 scale = Vector2( 0.027109, -2.75263 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="TriggerMiddle" type="Area2D" parent="Areas"]
 position = Vector2( 432, -1248 )
@@ -213,7 +214,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/TriggerMiddle"]
 position = Vector2( 3264, 1248 )
 scale = Vector2( 0.027109, -2.75263 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Trigger3" type="Area2D" parent="Areas"]
 position = Vector2( 5118.65, -1228.99 )
@@ -225,7 +226,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Trigger3"]
 position = Vector2( -526.761, 1227.82 )
 scale = Vector2( 0.027109, -2.75263 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Trigger4" type="Area2D" parent="Areas"]
 position = Vector2( 6919.56, -1225.22 )
@@ -237,7 +238,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Trigger4"]
 position = Vector2( -526.761, 1227.82 )
 scale = Vector2( 0.027109, -2.75263 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="TriggerEnd" type="Area2D" parent="Areas"]
 position = Vector2( 4044.43, -1244.22 )
@@ -249,7 +250,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/TriggerEnd"]
 position = Vector2( 3264, 1248 )
 scale = Vector2( 0.027109, -2.75263 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Items" type="Node" parent="."]
 
