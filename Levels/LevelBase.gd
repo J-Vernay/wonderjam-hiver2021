@@ -19,6 +19,11 @@ var _player = null
 
 func _ready():
 	_player = $Player
+	if get_node("MappingJ1") != null:
+		if _player.controlMode == 1:
+			$MappingJ2.visible = false
+		else:
+			$MappingJ1.visible = false
 	_current_checkpoint = $Checkpoints.get_child(0)
 	goto_checkpoint(_current_checkpoint.name)
 	_player.position = _current_checkpoint.position
