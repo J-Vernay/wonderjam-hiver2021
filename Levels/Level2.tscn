@@ -1408,7 +1408,6 @@ position = Vector2( 531.383, -67.635 )
 rotation = 1.5708
 scale = Vector2( 1, 2.5 )
 z_index = -1
-isOpening = false
 [connection signal="body_entered" from="Areas/Area2D" to="." method="trigger_last_checkpoint"]
 [connection signal="body_entered" from="Areas/Checkpoint1" to="." method="update_checkpoint" flags=6 binds= [ "1" ]]
 [connection signal="body_entered" from="Areas/Checkpoint2" to="." method="update_checkpoint" flags=6 binds= [ "2" ]]
