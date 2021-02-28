@@ -49,6 +49,7 @@ func _process(delta):
 			cooldown = 0.3
 			_redraw_menu()
 		elif Input.is_action_just_pressed("ui_accept"):
+			$AudioStreamPlayer.stop()
 			match Choices[current_selected]:
 				"1 JOUEUR":
 					var next = main_scene.instance()

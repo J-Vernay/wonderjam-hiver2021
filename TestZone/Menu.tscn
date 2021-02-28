@@ -64,7 +64,6 @@ scroll_base_offset = Vector2( 0, 120 )
 position = Vector2( 600, 712 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
-frame = 3
 playing = true
 
 [node name="Root" type="CenterContainer" parent="."]
