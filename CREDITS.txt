@@ -36,4 +36,27 @@ Nous avons utilisé des ressources dont voici les licenses :
     https://www.freepng.fr/png-a1ebru/
 
 - Eclairs :
-	https://www.pngegg.com/en/png-nlkqd
+    https://www.pngegg.com/en/png-nlkqd
+
+- Touches de clavier :
+    Keyboard Keys
+    Par trbry
+    https://opengameart.org/content/keyboard-keys
+
+- Manette :
+    Generic Gamepad Template
+    Par nicefrog
+    https://opengameart.org/content/generic-gamepad-template
+
+- Police du texte :
+    Montserrat
+    https://fonts.google.com/specimen/Montserrat
+
+- Police du compteur :
+    joystix
+    Par Typodermic Fonts
+    https://typodermicfonts.com/proportional-joystix/
+    (usage autorisé, cf. Open-Source à https://typodermicfonts.com/license/ )
+
+
+

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Levels/AllLevels.gd" type="Script" id=1]
 [ext_resource path="res://Graphics/Montserrat-Light.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Levels/Text.shader" type="Shader" id=3]
+[ext_resource path="res://Graphics/joystix monospace.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -12,6 +13,12 @@ size = 30
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [node name="AllLevels" type="Node2D"]
 script = ExtResource( 1 )
@@ -50,6 +57,18 @@ margin_right = 328.28
 margin_bottom = 43.5942
 custom_fonts/font = SubResource( 2 )
 text = "Je dois m'échapper..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="CanvasLayer"]
+margin_left = 784.0
+margin_right = 1187.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 3 )
+text = "0:00.000"
+align = 2
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

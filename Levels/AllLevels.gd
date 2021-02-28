@@ -1,5 +1,7 @@
 extends Node2D
 
+
+
 ###### LOGIC FOR SCENE TRANSITIONS
 
 export var SCREEN_WIDTH := 1200
@@ -39,6 +41,7 @@ func _process(delta):
 	if Engine.editor_hint:
 		$CanvasLayer/Rect.scale = Vector2(SCREEN_WIDTH, SCREEN_HEIGHT)
 		return
+	_process_time()
 	_process_text()
 	var progress = 1 - $Timer.time_left / $Timer.wait_time
 	$CanvasLayer/Rect.position.x = lerp(-SCREEN_WIDTH, SCREEN_WIDTH, progress)
@@ -141,4 +144,19 @@ func _process_text():
 		progress = inverse_lerp(0.8, 1, progress)
 		label.modulate.a = 1 - progress
 		label.rect_position.x = label_base_x - 100 * progress * progress
+	
+
+###### LOGIC FOR TIMER
+
+var start_of_timer := 0
+
+func _process_time():
+	var curr_val = OS.get_ticks_msec()
+	var minutes = int(curr_val / 60000)
+	curr_val = curr_val % 60000
+	var seconds = int(curr_val / 1000)
+	var millisec = curr_val % 1000
+	
+	var text = "%02d:%02d.%03d" % [ minutes, seconds, millisec ]
+	$CanvasLayer/Time.text = text
 	
