@@ -31,6 +31,8 @@ var jump = false
 var down = false
 var attack = false
 
+var iceSound : AudioStreamSample
+
 enum States{
 	Idle, Walk, Jump, Fall, Cast, Attack
 }
@@ -39,6 +41,7 @@ enum States{
 func _ready():
 	velocity = Vector2(0, 0)
 	HUD = $HUD
+	iceSound = preload("res://Sounds/Ice attack 2.wav")
 
 
 var state = States.Idle
@@ -73,6 +76,8 @@ func _physics_process(delta):
 			for lastBox in lastBoxes:
 				lastBox.StuckIt()
 				setState(States.Cast)
+			$AudioStreamPlayer.stream = iceSound
+			$AudioStreamPlayer.play()
 			removeBoxes()
 		ObjectProcess(delta)
 
@@ -136,7 +141,6 @@ func StartJump():
 	velocity.y = -JUMPFORCE
 	setState(States.Jump)
 	time_since_jump = 0
-	$AudioStreamPlayer.play()
 
 func JumpProcess(delta):
 	time_since_last_ground = 1000

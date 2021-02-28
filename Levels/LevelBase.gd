@@ -44,6 +44,7 @@ func trigger_text(__, text):
 	emit_signal("put_text", text)
 
 func _process(delta):
-	var camera = _player.get_node("Camera2D")
-	if camera != null:
-		camera.smoothing_enabled = true
+	if(_player.has_node("Camera2D")):
+		var camera = _player.get_node("Camera2D")
+		if camera != null:
+			camera.smoothing_enabled = true
