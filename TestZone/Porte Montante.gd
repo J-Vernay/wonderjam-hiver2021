@@ -2,7 +2,7 @@ extends StaticBody2D
 tool
 
 export var isOpening = false
-var animationOver = true
+var animationOver = false
 const OPENINGSPEED = 90
 
 func open():
