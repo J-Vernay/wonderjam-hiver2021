@@ -10,7 +10,7 @@ script = ExtResource( 3 )
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.572549, 0.192157, 0.192157, 1 )
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -27,8 +27,7 @@ __meta__ = {
 [node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer"]
 margin_right = 1200.0
 margin_bottom = 445.0
-size_flags_vertical = 3
-stretch = true
+size_flags_vertical = 4
 
 [node name="Viewport1" type="Viewport" parent="VBoxContainer/ViewportContainer"]
 size = Vector2( 1200, 445 )

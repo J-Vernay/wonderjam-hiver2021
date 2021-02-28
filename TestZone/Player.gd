@@ -463,3 +463,7 @@ func finish():
 	get_parent().add_child(foot)
 	foot.global_position = footGlobalPos
 	get_parent().finishGame()
+
+
+func one_player_only():
+	$HUD.scale.x = 0

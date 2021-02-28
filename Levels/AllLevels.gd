@@ -1,6 +1,9 @@
 extends Node2D
 
+var is_one_player_only := false
 
+func one_player_only():
+	is_one_player_only = true
 
 ###### LOGIC FOR SCENE TRANSITIONS
 
@@ -59,8 +62,12 @@ func _process(delta):
 		_curr_scene_instance.connect("reset_to_checkpoint", self, "_on_reset_to_checkpoint")
 		_curr_scene_instance.connect("put_text", self, "put_text")
 		_curr_scene_instance.allLevels = self
+		if is_one_player_only:
+			if _curr_scene_instance.has_node("Items"):
+				_curr_scene_instance.remove_child(_curr_scene_instance.get_node("Items"))
 		player = _curr_scene_instance.get_node("Player")
 		player.controlMode = playerNumber
+		player.one_player_only()
 		player.world = self
 		
 		$SceneParent.add_child(_curr_scene_instance)

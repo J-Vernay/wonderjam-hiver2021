@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cyberpunk-street.ogg-5ee09f1ec9c488b6fa72942c54666c02.oggstr"
+
+[deps]
+
+source_file="res://Sounds/cyberpunk-street.ogg"
+dest_files=[ "res://.import/cyberpunk-street.ogg-5ee09f1ec9c488b6fa72942c54666c02.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

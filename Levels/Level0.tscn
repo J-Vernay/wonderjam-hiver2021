@@ -78,15 +78,10 @@ texture = ExtResource( 14 )
 position = Vector2( 2443.37, 18.6063 )
 texture = ExtResource( 13 )
 
-[node name="item_j1" type="Sprite" parent="MappingJ1"]
-position = Vector2( 632.831, 18.6063 )
-texture = ExtResource( 17 )
-
 [node name="MappingJ2" type="AnimatedSprite" parent="."]
 position = Vector2( -72.7392, -35.3833 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
-frame = 1
 playing = true
 
 [node name="jump_j2" type="Sprite" parent="MappingJ2"]
@@ -260,6 +255,11 @@ collision_layer = 17
 
 [node name="ItemBox2" parent="Items" instance=ExtResource( 4 )]
 position = Vector2( 3136, 32 )
+
+[node name="item_j1" type="Sprite" parent="Items"]
+position = Vector2( 1152, -7.24792e-05 )
+scale = Vector2( 1.93533, 1.90168 )
+texture = ExtResource( 17 )
 [connection signal="body_entered" from="Areas/GotoCheckpoint" to="." method="trigger_last_checkpoint" flags=6]
 [connection signal="body_entered" from="Areas/Trigger1" to="." method="trigger_text" flags=6 binds= [ "Je dois m'échapper d'ici !" ]]
 [connection signal="body_entered" from="Areas/Trigger2" to="." method="trigger_text" flags=6 binds= [ "Je dois les mettre en sécurité..." ]]
