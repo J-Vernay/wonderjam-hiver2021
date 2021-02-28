@@ -421,3 +421,7 @@ func cameraZoneEnter(target, zoom):
 func _on_AudioStreamPlayer2D_finished():
 	$AudioStreamPlayer.stop()
 	print("yeah")
+
+
+func hit():
+	get_parent().trigger_last_checkpoint(self)
