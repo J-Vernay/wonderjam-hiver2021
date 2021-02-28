@@ -12,7 +12,7 @@ var MAXSPEED = 400
 const FRICTION = 0.8
 var ACCELERATION = 70
 const AIRCONTROLRATIO = 0.2
-const GRAVITY = 600
+const GRAVITY = 1200
 const JUMPFORCE = 300
 const PUSH = 70
 const COYOTE_TIME = 0.1
@@ -72,7 +72,9 @@ func _physics_process(delta):
 		if(Input.is_action_just_pressed(getMyInput("Activate")) && lastBoxes.size() != 0):
 			for lastBox in lastBoxes:
 				lastBox.StuckIt()
-				setState(States.Cast)
+			if velocity.y < 0:
+				velocity.y = 0
+			setState(States.Cast)
 			removeBoxes()
 		ObjectProcess(delta)
 
@@ -81,7 +83,8 @@ func DoCustomMove(do_snap):
 	for index in get_slide_count():
 		var collision = get_slide_collision(index)
 		if (collision.collider.is_in_group("pushables")):
-			collision.collider.apply_central_impulse(-collision.normal * PUSH * abs(Vector2(1, 0).dot(collision.normal)))
+			var coef = clamp(abs(Vector2(1, 0).dot(collision.normal)), 0.2, 1)
+			collision.collider.apply_central_impulse(-collision.normal * PUSH * coef)
 
 
 func IdleProcess(delta):
@@ -176,7 +179,7 @@ func FallProcess(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0, FRICTION * AIRCONTROLRATIO)
 	
-	velocity.y += GRAVITY * delta * 2
+	velocity.y += GRAVITY * delta
 	DoCustomMove(true)
 	#velocity = move_and_slide(velocity, VECTOR_UP)
 	if(is_on_floor()):
