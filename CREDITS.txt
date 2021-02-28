@@ -37,3 +37,6 @@ Nous avons utilisé des ressources dont voici les licenses :
 
 - Eclairs :
 	https://www.pngegg.com/en/png-nlkqd
+
+- Musique de fond :
+credit as: "Cyberpunk City" by Eric Matyas soundimage.org

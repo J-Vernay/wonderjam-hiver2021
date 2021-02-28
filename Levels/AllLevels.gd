@@ -10,9 +10,11 @@ var thunder = preload("res://TestZone/Thunder.tscn")
 var levels := [
 	preload("res://Levels/Level0.tscn"),
 	preload("res://Levels/Level1.tscn"),
-	preload("res://Levels/Level2.tscn")
+	preload("res://Levels/Level2.tscn"),
+	preload("res://Levels/Level3.tscn"),
+	preload("res://Levels/Level4.tscn")
 ]
-var curr_lvl := 0
+var curr_lvl := 4
 
 var _curr_scene_instance = null
 var _next_scene_instance = null

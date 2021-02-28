@@ -19,7 +19,7 @@ var _player = null
 
 func _ready():
 	_player = $Player
-	if get_node("MappingJ1") != null:
+	if(has_node("MappingJ1")):
 		if _player.controlMode == 1:
 			$MappingJ2.visible = false
 		else:
