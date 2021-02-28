@@ -23,6 +23,7 @@ var velocity : Vector2
 var disableImpulse = false
 var time_since_last_ground = 1000
 var time_since_jump = 0
+var has_control := true
 
 var right = false
 var left = false
@@ -47,41 +48,44 @@ func _ready():
 var state = States.Idle
 func _physics_process(delta):
 	if(!Engine.editor_hint):
-		right = Input.is_action_pressed(getMyInput("Right"))
-		left = Input.is_action_pressed(getMyInput("Left"))
-		up = Input.is_action_pressed(getMyInput("Up"))
-		jump = Input.is_action_pressed(getMyInput("Jump"))
-		down = Input.is_action_pressed(getMyInput("Down"))
-		attack = Input.is_action_just_pressed(getMyInput("Attack"))
-		
-		time_since_last_ground += delta
-		time_since_jump += delta
-		if (state != States.Jump and jump and time_since_last_ground <= COYOTE_TIME):
-			StartJump()
-		
-		match(state):
-			States.Idle:
-				IdleProcess(delta)
-			States.Walk:
-				WalkProcess(delta)
-			States.Jump:
-				JumpProcess(delta)
-			States.Fall:
-				FallProcess(delta)
-			States.Cast:
-				CastProcess(delta)
-			States.Attack:
-				AttackProcess(delta)
-		if(Input.is_action_just_pressed(getMyInput("Activate")) && lastBoxes.size() != 0):
-			for lastBox in lastBoxes:
-				lastBox.StuckIt()
-			if velocity.y < 0:
-				velocity.y = 0
-			setState(States.Cast)
-			$AudioStreamPlayer.stream = iceSound
-			$AudioStreamPlayer.play()
-			removeBoxes()
-		ObjectProcess(delta)
+		if(has_control):
+			right = Input.is_action_pressed(getMyInput("Right"))
+			left = Input.is_action_pressed(getMyInput("Left"))
+			up = Input.is_action_pressed(getMyInput("Up"))
+			jump = Input.is_action_pressed(getMyInput("Jump"))
+			down = Input.is_action_pressed(getMyInput("Down"))
+			attack = Input.is_action_just_pressed(getMyInput("Attack"))
+			
+			time_since_last_ground += delta
+			time_since_jump += delta
+			if (state != States.Jump and jump and time_since_last_ground <= COYOTE_TIME):
+				StartJump()
+			
+			match(state):
+				States.Idle:
+					IdleProcess(delta)
+				States.Walk:
+					WalkProcess(delta)
+				States.Jump:
+					JumpProcess(delta)
+				States.Fall:
+					FallProcess(delta)
+				States.Cast:
+					CastProcess(delta)
+				States.Attack:
+					AttackProcess(delta)
+			if(Input.is_action_just_pressed(getMyInput("Activate")) && lastBoxes.size() != 0):
+				for lastBox in lastBoxes:
+					lastBox.StuckIt()
+				if velocity.y < 0:
+					velocity.y = 0
+				setState(States.Cast)
+				$AudioStreamPlayer.stream = iceSound
+				$AudioStreamPlayer.play()
+				removeBoxes()
+			ObjectProcess(delta)
+		else:
+			move_and_slide(velocity)
 
 func DoCustomMove(do_snap):
 	velocity = move_and_slide_with_snap(velocity, int(do_snap)*SNAPVECTOR, VECTOR_UP, true, 4, deg2rad(60), false)
@@ -425,3 +429,21 @@ func _on_AudioStreamPlayer2D_finished():
 
 func hit():
 	get_parent().trigger_last_checkpoint(self)
+
+
+func lockMovement():
+	$AnimatedSprite.play("Walk")
+	$AnimatedSprite.flip_h = false
+	velocity = Vector2(MAXSPEED, 0)
+	has_control = false
+	$Camera2D.drag_margin_bottom = 0
+	$Camera2D.drag_margin_right = 0
+	$Camera2D.drag_margin_left = 0
+	$Camera2D.drag_margin_top = 0
+	$Camera2D.smoothing_enabled = false
+
+func teleportConstantBack(body):
+	if(body == self):
+		position.x -= 1600
+		print($Camera2D.smoothing_enabled)
+

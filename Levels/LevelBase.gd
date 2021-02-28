@@ -49,7 +49,10 @@ func trigger_text(__, text):
 	emit_signal("put_text", text)
 
 func _process(delta):
-	if(_player.has_node("Camera2D")):
+	if(_player.has_node("Camera2D") && _player.has_control):
 		var camera = _player.get_node("Camera2D")
 		if camera != null:
 			camera.smoothing_enabled = true
+
+func finishWorld(__):
+	_player.lockMovement()
