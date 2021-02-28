@@ -1,7 +1,7 @@
 class_name LevelBase
 extends Node2D
 
-
+signal game_end
 signal reached_end # trigger for passing to the next level
 signal reset_to_checkpoint(pos) # ask parent to reset the scene, then the parent will call goto_checkpoint()
 
@@ -54,6 +54,9 @@ func _process(delta):
 		var camera = _player.get_node("Camera2D")
 		if camera != null:
 			camera.smoothing_enabled = true
+	if time_since_end >= 0:
+		time_since_end += delta
+		$HUD/Label2.visible_characters = int(time_since_end * 20)
 
 var finalScore = 0
 func finishWorld(__):
@@ -84,15 +87,21 @@ func finishWorld(__):
 		timer.one_shot = true
 		timer.start()
 
+var time_since_end = -1
+
 func enableFinishPossibility():
 	_player.enableNextWorld()
 	$HUD/Label.visible = true
+	$HUD/Label2.visible = true
+	time_since_end = 0
+
+func trigger_game_end():
+	print("hiTR")
+	emit_signal("game_end")
 
 func finishGame():
-		$HUD/Label.visible = false
-		var timer = Timer.new()
-		add_child(timer)
-		timer.connect("timeout", self, "trigger_end", [self])
-		timer.set_wait_time(3) #3 secondes pour permettre de voir le joueur s'en aller de l'écran avant de charger la nouvelle scene
-		timer.one_shot = true
-		timer.start()
+	$HUD/Label.visible = false
+	$HUD/Label2.visible = false
+	time_since_end = -1
+	$HUD/Timer.start()
+	print("hi")

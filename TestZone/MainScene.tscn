@@ -57,3 +57,5 @@ otherWorld = NodePath("../../../ViewportContainer/Viewport1/AllLevels1")
 stream = ExtResource( 2 )
 volume_db = -80.0
 autoplay = true
+[connection signal="game_end" from="VBoxContainer/ViewportContainer/Viewport1/AllLevels1" to="." method="_on_game_end"]
+[connection signal="game_end" from="VBoxContainer/ViewportContainer2/Viewport2/AllLevels2" to="." method="_on_game_end"]
