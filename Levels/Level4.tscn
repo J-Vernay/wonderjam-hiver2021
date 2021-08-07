@@ -1395,6 +1395,7 @@ position = Vector2( 1906.79, 220.632 )
 position = Vector2( 261.617, 4.72827 )
 scale = Vector2( 1, 2.5 )
 z_index = -1
+isOpening = false
 
 [node name="Button2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 2263.33, 313.13 )
@@ -1403,6 +1404,7 @@ position = Vector2( 2263.33, 313.13 )
 position = Vector2( -94.9229, -410.674 )
 scale = Vector2( 1, 2.5 )
 z_index = -1
+isOpening = false
 
 [node name="Danger" type="Node" parent="."]
 
@@ -1459,10 +1461,12 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="HUD"]
 one_shot = true
 
-[node name="ItemBox" parent="." instance=ExtResource( 4 )]
+[node name="Items" type="Node" parent="."]
+
+[node name="ItemBox" parent="Items" instance=ExtResource( 4 )]
 position = Vector2( 688, 192 )
 
-[node name="ItemBox2" parent="." instance=ExtResource( 4 )]
+[node name="ItemBox2" parent="Items" instance=ExtResource( 4 )]
 position = Vector2( 2304, -88 )
 [connection signal="body_entered" from="Areas/Area2D" to="." method="trigger_last_checkpoint"]
 [connection signal="body_entered" from="Areas/End" to="." method="finishWorld"]

@@ -31,6 +31,7 @@ var up = false
 var jump = false
 var down = false
 var attack = false
+var activate = false
 
 var iceSound : AudioStreamSample
 
@@ -69,7 +70,7 @@ func _physics_process(delta):
 					CastProcess(delta)
 				States.Attack:
 					AttackProcess(delta)
-			if(Input.is_action_just_pressed(getMyInput("Activate")) && lastBoxes.size() != 0):
+			if (activate && lastBoxes.size() != 0):
 				for lastBox in lastBoxes:
 					lastBox.StuckIt()
 				if velocity.y < 0:
@@ -472,6 +473,7 @@ func update_controls():
 		jump = check_both_controls("Jump")
 		down = check_both_controls("Down")
 		attack = check_both_controls("Attack")
+		activate = check_both_controls("Activate")
 	else:
 		right = Input.is_action_pressed(getMyInput("Right"))
 		left = Input.is_action_pressed(getMyInput("Left"))
@@ -479,6 +481,7 @@ func update_controls():
 		jump = Input.is_action_pressed(getMyInput("Jump"))
 		down = Input.is_action_pressed(getMyInput("Down"))
 		attack = Input.is_action_just_pressed(getMyInput("Attack"))
+		activate = Input.is_action_just_pressed(getMyInput("Activate"))
 
 func one_player_only():
 	$HUD.scale.x = 0
